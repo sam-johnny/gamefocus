@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { games } from "@/lib/games";
 
 const NAV = [
   { href: "/", label: "Accueil" },
-  { href: "/#articles", label: "Articles" },
+  ...games.map((g) => ({ href: `/${g.slug}/`, label: g.shortName })),
   { href: "/a-propos/", label: "À propos" },
 ];
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { articles } from "@/lib/articles";
+import { articles, articleUrl } from "@/lib/articles";
+import { games } from "@/lib/games";
 
 export default function Footer() {
   return (
@@ -12,10 +13,18 @@ export default function Footer() {
             jeux vidéo qui comptent — en ce moment, tout sur GTA 6.
           </p>
         </div>
+        <nav className="footer-col" aria-label="Dossiers par jeu">
+          <p className="footer-heading">Dossiers</p>
+          {games.map((g) => (
+            <Link key={g.slug} href={`/${g.slug}/`} className="footer-link">
+              {g.shortName}
+            </Link>
+          ))}
+        </nav>
         <nav className="footer-col" aria-label="Articles du footer">
           <p className="footer-heading">Derniers articles</p>
           {articles.slice(0, 4).map((a) => (
-            <Link key={a.slug} href={`/articles/${a.slug}/`} className="footer-link">
+            <Link key={a.slug} href={articleUrl(a)} className="footer-link">
               {a.shortTitle}
             </Link>
           ))}

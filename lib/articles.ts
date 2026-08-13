@@ -10,6 +10,7 @@ export type FaqItem = { q: string; a: string };
 
 export type Article = {
   slug: string;
+  game: string; // slug du jeu (référence vers lib/games.ts)
   title: string;
   shortTitle: string;
   description: string;
@@ -38,7 +39,8 @@ export const GTA_RELEASE_ISO = "2026-11-19T00:00:00Z";
 
 export const articles: Article[] = [
   {
-    slug: "gta-6-date-de-sortie-prix-editions-precommande",
+    slug: "date-de-sortie-prix-editions-precommande",
+    game: "gta-6",
     shortTitle: "Date, prix & précommandes",
     title:
       "GTA 6 : date de sortie, prix, éditions et précommandes — le guide complet",
@@ -134,7 +136,8 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: "gta-6-trailer-3-quand-sortira-prochaine-bande-annonce",
+    slug: "trailer-3-quand-sortira-prochaine-bande-annonce",
+    game: "gta-6",
     shortTitle: "Trailer 3 : le point",
     title:
       "GTA 6 : quand sortira le trailer 3 ? Ce que la conférence Take-Two du 7 août a changé",
@@ -216,7 +219,8 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: "gta-6-histoire-lucia-jason-leonida-vice-city",
+    slug: "histoire-lucia-jason-leonida-vice-city",
+    game: "gta-6",
     shortTitle: "Histoire & carte",
     title:
       "GTA 6 : Lucia, Jason, Leonida… tout ce que l'on sait de l'histoire et de la carte",
@@ -296,7 +300,8 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: "gta-6-pc-quand-sortira-version-pc",
+    slug: "pc-quand-sortira-version-pc",
+    game: "gta-6",
     shortTitle: "GTA 6 sur PC",
     title:
       "GTA 6 sur PC : pourquoi il va falloir patienter (et combien de temps)",
@@ -373,7 +378,8 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: "gta-6-gta-online-avenir-nouveau-mode-en-ligne",
+    slug: "gta-online-avenir-nouveau-mode-en-ligne",
+    game: "gta-6",
     shortTitle: "L’après GTA Online",
     title:
       "GTA 6 et l'après GTA Online : ce que le 19 novembre va changer pour des millions de joueurs",
@@ -449,6 +455,14 @@ export const articles: Article[] = [
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
+}
+
+export function getArticlesByGame(gameSlug: string): Article[] {
+  return articles.filter((a) => a.game === gameSlug);
+}
+
+export function articleUrl(article: Article): string {
+  return `/${article.game}/${article.slug}/`;
 }
 
 export function formatDate(iso: string): string {

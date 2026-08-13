@@ -1,0 +1,147 @@
+# AGENTS.md — GameFocus
+
+> Ce fichier s'adresse aux agents de code IA. Il décrit le projet tel qu'il est réellement, sans présupposés.
+
+## Aperçu du projet
+
+**GameFocus** est un site d'actualité jeux vidéo en français, organisé en **cocon sémantique par jeu** : chaque jeu a son dossier (page hub pilier) regroupant ses news, guides et analyses. Premier dossier : **GTA 6**. C'est un site **100 % statique** : aucune base de données, aucune API, aucun backend. Tout le contenu éditorial est codé en dur dans le dépôt.
+
+**Objectif du site : générer du trafic organique (SEO) pour le monétiser ensuite via Google AdSense.** Toute évolution doit servir cet objectif : maillage interne fort, pages piliers par jeu, contenus à forte intention de recherche, données structurées complètes. Les emplacements pubs (`AdSlot`) sont déjà prévus dans les pages.
+
+- Stack : **Next.js 15.3** (App Router) + **React 19** + **TypeScript strict**
+- Export statique complet (`output: "export"` dans `next.config.mjs`) — hébergeable n'importe où (GitHub Pages, Cloudflare Pages, Netlify…)
+- **Aucune librairie UI** : design system maison dans `app/globals.css` (~1120 lignes, palette noir forêt + néon lime, esprit magazine de nuit)
+- Polices via `next/font/google` : Anton (display), Playfair Display (serif), Inter (texte), JetBrains Mono — exposées en variables CSS `--font-*`
+- Langue du site et du code (commentaires, contenus) : **français**
+- Site de fans, non affilié à Rockstar Games / Take-Two Interactive
+
+## Commandes de build
+
+```bash
+npm install
+npm run dev    # serveur de développement Next.js
+npm run build  # build + export statique, puis copie out/ → dist/
+npm run start  # next start (peu utile : le site est pensé pour l'export statique)
+```
+
+Le script `build` fait `next build && rm -rf dist && cp -r out dist` : **le livrable final est `dist/`**, pas `out/`.
+
+Note du README : si le build échoue avec « Build directory is not writeable » (montages FUSE), builder dans un dossier classique puis copier `dist/`.
+
+**Il n'y a aucun test, aucun linter, aucun formateur configuré** (pas de vitest/jest, eslint, prettier, ni CI). La seule vérification disponible est le build Next.js (qui type-check le TypeScript strict) :
+
+```bash
+npm run build   # sert de vérification après toute modification
+```
+
+## Architecture des URLs (cocon sémantique)
+
+```
+/                       accueil : hero, compte à rebours, dossiers par jeu, derniers articles
+/<jeu>/                 page HUB (pilier) du jeu — ex. /gta-6/
+/<jeu>/<article>/       article rattaché au jeu — ex. /gta-6/date-de-sortie-prix-editions-precommande/
+/a-propos/              page à propos
+```
+
+Règles du cocon (à respecter dans toute évolution) :
+
+- **Chaque hub lie tous ses articles** ; **chaque article lie son hub** (fil d'Ariane + encadré latéral « Dossier »).
+- **Les articles liés en bas d'article privilégient le même jeu** avant les autres jeux.
+- Les slugs d'articles **ne répètent pas le nom du jeu** (déjà dans l'URL) : `/gta-6/trailer-3-.../`, pas `/gta-6/gta-6-trailer-3-.../`.
+- La navigation (Header, Footer) et l'accueil exposent les hubs — ils concentrent le « jus » SEO.
+
+## Organisation du code
+
+```
+app/                    pages Next.js (App Router)
+  layout.tsx            layout racine : polices, métadonnées globales, JSON-LD WebSite,
+                        Header/Footer, lang="fr"
+  page.tsx              accueil : hero (ParticleField), Marquee, compte à rebours,
+                        cartes des dossiers (hubs), grille d'articles, AdSlot
+  [game]/page.tsx       page hub par jeu : generateStaticParams + dynamicParams = false,
+                        métadonnées + canonical, JSON-LD CollectionPage/ItemList &
+                        BreadcrumbList, intro SEO, infos clés, articles du jeu, AdSlot
+  [game]/[slug]/page.tsx  page article : generateStaticParams + dynamicParams = false,
+                        métadonnées + canonical, JSON-LD Article, FAQPage & BreadcrumbList,
+                        keyPoints, ArticleBody, FAQ, articles liés (même jeu d'abord), AdSlot
+  a-propos/page.tsx     page à propos
+  sitemap.ts            sitemap.xml généré (force-static) : accueil, hubs, articles, à propos
+  robots.ts             robots.txt généré (force-static)
+  globals.css           design system complet (variables CSS, classes utilitaires .container,
+                        .btn, .section-head, .prose, .article-*, .hub-*, etc.)
+  icon.svg              favicon
+lib/games.ts            les JEUX (hubs) : slug, nom, description SEO, intro, visuel,
+                        date de sortie, plateformes + getGame(slug)
+lib/articles.ts         contenu éditorial + constantes — LE point d'entrée du contenu
+components/             composants réutilisables (voir ci-dessous)
+public/images/          visuels — ABSENT DU DÉPÔT (illustrations générées par IA,
+                        à copier depuis l'environnement de build ; référencées en /images/*.jpg)
+```
+
+`dist/`, `out/`, `.next/` et `node_modules/` sont gitignorés.
+
+### `lib/games.ts` — les dossiers par jeu
+
+Exporte :
+
+- Le type `Game` : `slug`, `name`, `shortName`, `tagline`, `description` (meta SEO du hub), `intro` (paragraphes, supporte le `**gras**`), `cover`, `coverAlt`, `keywords`, `releaseIso` (optionnel), `releaseLabel`, `platforms`
+- `games: Game[]` : actuellement uniquement `gta-6`
+- Helper : `getGame(slug)`
+
+**Ajouter un jeu** : ajouter un objet dans `games` + rattacher des articles via leur champ `game` — le hub `/<jeu>/`, la nav, le footer, l'accueil et le sitemap sont générés automatiquement au build.
+
+### `lib/articles.ts` — le cœur éditorial
+
+Exporte :
+
+- Les types `Block` (union discriminée : `p` | `h2` | `h3` | `list` | `quote` | `image`), `FaqItem`, `Article`
+- `SITE` : constantes globales (nom, URL `https://gamefocus.fr`, tagline, description SEO)
+- `GTA_RELEASE_ISO = "2026-11-19T00:00:00Z"` : date de sortie utilisée par le compte à rebours
+- `articles: Article[]` : les articles complets (slug, **game** = slug du jeu, titre, description/excerpt SEO, dates ISO, temps de lecture, cover, mots-clés, keyPoints, blocks, faq)
+- Helpers : `getArticle(slug)`, `getArticlesByGame(gameSlug)`, `articleUrl(article)` → `/<jeu>/<slug>/`, `formatDate(iso)` (format français long, UTC)
+
+**Ajouter un article** : ajouter un objet dans `articles` (avec son `game` correspondant à un `slug` de `lib/games.ts`) + son visuel dans `public/images/` — la page, le sitemap et les métadonnées sont générés automatiquement au build.
+
+### Composants (`components/`)
+
+| Composant | Type | Rôle |
+|---|---|---|
+| `Header.tsx` / `Footer.tsx` | serveur | navigation et pied de page — liens générés depuis `games` |
+| `ArticleCard.tsx` | serveur | carte article (grille accueil / hub / liés), URLs via `articleUrl()` |
+| `ArticleBody.tsx` | serveur | rend les `Block[]` en JSX ; supporte le `**gras**` inline via regex dans les `p` et `list` ; exporte aussi `Rich` (gras inline, utilisé par les intros des hubs) |
+| `AdSlot.tsx` | serveur | emplacements publicitaires (`leaderboard` 728×90, `rectangle` 300×250, `in-article`) — placeholder prêt pour AdSense |
+| `Countdown.tsx` | **client** | compte à rebours vers `GTA_RELEASE_ISO` |
+| `ParticleField.tsx` | **client** | canvas de particules néon en fond du hero ; respecte `prefers-reduced-motion` |
+| `Marquee.tsx` | **client** | bandeau défilant |
+| `Reveal.tsx` | **client** | animation d'apparition au scroll |
+
+## Conventions de code
+
+- **Alias de chemin `@/*`** → racine du projet (`@/lib/articles`, `@/components/Header`)
+- TypeScript **strict** ; props typées, pas de `any`
+- Composants **serveur par défaut** ; `"use client"` uniquement quand c'est nécessaire (hooks, canvas, timers) — 4 composants actuellement
+- Export `default` pour les composants, nommés `PascalCase` ; fonctions et constantes en camelCase/SCREAMING_SNAKE_CASE
+- Images : `<img>` natif partout (pas `next/image`, car `images: { unoptimized: true }` + export statique), avec `alt` descriptif en français et `fetchPriority="high"` sur les visuels hero/cover
+- Styles : pas de CSS modules ni Tailwind — classes globales nommées en kebab-case (`.article-page`, `.hero-title`, `.btn-primary`, `.hub-card`) définies dans `app/globals.css`, adossées aux variables CSS du `:root`
+- Accessibilité soignée : `aria-label`, `aria-hidden`, rôles ARIA, respect de `prefers-reduced-motion`
+- URLs canoniques avec **slash final** (`trailingSlash: true`) : écrire les liens internes comme `/<jeu>/<slug>/` — **toujours via `articleUrl(article)`** pour les articles
+- Le gras inline dans les contenus s'écrit `**texte**` (mini-markdown maison, traité par `ArticleBody`/`Rich`) — pas d'autre syntaxe supportée
+
+## SEO (pilier du projet — objectif trafic → AdSense)
+
+Le site est optimisé pour le référencement ; **ne pas casser ces mécanismes** :
+
+- **Cocon sémantique par jeu** : hub pilier `/<jeu>/` + articles satellites, maillage interne systématique (voir « Architecture des URLs »)
+- Métadonnées + Open Graph + Twitter card par page (`generateMetadata` par hub et par article, `metadata` global dans le layout)
+- Canonical par hub (`/<jeu>/`) et par article (`/<jeu>/<slug>/`)
+- JSON-LD : `WebSite` (layout global), `CollectionPage` + `ItemList` + `BreadcrumbList` (hubs), `Article` + `FAQPage` + `BreadcrumbList` (articles)
+- `sitemap.xml` et `robots.txt` générés depuis `lib/articles.ts` et `lib/games.ts`
+- Export statique = HTML complet servi aux crawlers
+
+## Sécurité et points de vigilance
+
+- Aucun secret, aucune variable d'environnement, aucune dépendance au-delà de next/react/react-dom (+ types et TypeScript en dev)
+- `dangerouslySetInnerHTML` utilisé uniquement pour injecter les JSON-LD sérialisés depuis des données locales du dépôt — ne jamais l'étendre à des données externes
+- Les visuels `public/images/` ne sont pas versionnés : un article sans son image affichera une image cassée au build comme en prod
+- Dates de contenu en ISO (`date`, `updatedAt`) ; `formatDate` suppose `YYYY-MM-DD` et force midi UTC pour éviter les décalages de fuseau
+- Publicité : `AdSlot` est un placeholder ; activer AdSense = remplacer son contenu par le snippet `ins.adsbygoogle` et ajouter le script global dans `app/layout.tsx`

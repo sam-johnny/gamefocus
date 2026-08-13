@@ -5,27 +5,28 @@ import ArticleBody from "@/components/ArticleBody";
 import ArticleCard from "@/components/ArticleCard";
 import AdSlot from "@/components/AdSlot";
 import Reveal from "@/components/Reveal";
-import { articles, getArticle, formatDate, SITE } from "@/lib/articles";
+import { articles, getArticle, getArticlesByGame, articleUrl, formatDate, SITE } from "@/lib/articles";
+import { getGame } from "@/lib/games";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+  return articles.map((a) => ({ game: a.game, slug: a.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ game: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { game: gameSlug, slug } = await params;
   const article = getArticle(slug);
-  if (!article) return {};
+  if (!article || article.game !== gameSlug) return {};
   return {
     title: article.title,
     description: article.description,
     keywords: article.keywords,
-    alternates: { canonical: `/articles/${article.slug}/` },
+    alternates: { canonical: articleUrl(article) },
     openGraph: {
       type: "article",
       title: article.title,
@@ -42,13 +43,19 @@ export async function generateMetadata({
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ game: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { game: gameSlug, slug } = await params;
   const article = getArticle(slug);
-  if (!article) notFound();
+  if (!article || article.game !== gameSlug) notFound();
+  const game = getGame(article.game);
+  if (!game) notFound();
 
-  const related = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
+  // Maillage interne : priorité aux articles du même jeu (cocon sémantique)
+  const related = [
+    ...getArticlesByGame(article.game).filter((a) => a.slug !== article.slug),
+    ...articles.filter((a) => a.game !== article.game),
+  ].slice(0, 3);
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -61,7 +68,7 @@ export default async function ArticlePage({
     inLanguage: "fr-FR",
     author: { "@type": "Organization", name: "Rédaction GameFocus", url: SITE.url },
     publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
-    mainEntityOfPage: `${SITE.url}/articles/${article.slug}/`,
+    mainEntityOfPage: `${SITE.url}${articleUrl(article)}`,
   };
 
   const faqLd = {
@@ -74,15 +81,28 @@ export default async function ArticlePage({
     })),
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: game.shortName, item: `${SITE.url}/${game.slug}/` },
+      { "@type": "ListItem", position: 3, name: article.title, item: `${SITE.url}${articleUrl(article)}` },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       <article className="article-page">
         <div className="container article-head">
           <nav className="breadcrumb" aria-label="Fil d'Ariane">
             <Link href="/">Accueil</Link>
+            <span aria-hidden="true"> / </span>
+            <Link href={`/${game.slug}/`}>{game.shortName}</Link>
             <span aria-hidden="true"> / </span>
             <span>{article.category}</span>
           </nav>
@@ -133,13 +153,13 @@ export default async function ArticlePage({
           <aside className="article-aside">
             <AdSlot format="rectangle" />
             <div className="aside-box">
-              <p className="aside-title">Dossier GTA 6</p>
+              <p className="aside-title">Dossier {game.shortName}</p>
               <p className="aside-text">
-                Sortie le <strong>19 novembre 2026</strong> sur PS5 et Xbox
-                Series X|S. Précommandes ouvertes depuis le 25 juin.
+                Sortie le <strong>{game.releaseLabel}</strong> sur{" "}
+                {game.platforms.join(" et ")}. {game.tagline}.
               </p>
-              <Link href="/" className="btn btn-primary btn-small">
-                Suivre l'actu
+              <Link href={`/${game.slug}/`} className="btn btn-primary btn-small">
+                Tout le dossier {game.shortName}
               </Link>
             </div>
           </aside>

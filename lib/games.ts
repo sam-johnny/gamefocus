@@ -1,0 +1,47 @@
+export type Game = {
+  slug: string;
+  name: string;
+  shortName: string;
+  tagline: string;
+  description: string; // meta SEO de la page hub
+  intro: string[]; // paragraphes éditoriaux de la page hub
+  cover: string;
+  coverAlt: string;
+  keywords: string[];
+  releaseIso?: string; // date de sortie ISO, si connue
+  releaseLabel: string;
+  platforms: string[];
+};
+
+export const games: Game[] = [
+  {
+    slug: "gta-6",
+    name: "Grand Theft Auto VI",
+    shortName: "GTA 6",
+    tagline: "Date de sortie, trailers, précommandes et rumeurs vérifiées",
+    description:
+      "Toute l'actualité de GTA 6 : date de sortie confirmée au 19 novembre 2026, trailers, précommandes, éditions, version PC, histoire de Lucia et Jason et avenir de GTA Online. Guides et analyses mis à jour.",
+    intro: [
+      "Treize ans après GTA V, **Grand Theft Auto VI** est le jeu le plus attendu de la décennie. Sortie officielle : le **19 novembre 2026** sur **PlayStation 5** et **Xbox Series X|S**. Retour à Vice City, deux protagonistes (Lucia et Jason), et un état de Leonida entièrement à explorer.",
+      "Ce dossier rassemble **toute l'actualité vérifiée de GTA 6** : date de sortie, prix et éditions en précommande, analyse des trailers, histoire et personnages, version PC et avenir du mode en ligne. Chaque annonce de Rockstar Games est décryptée et les pages sont mises à jour dès qu'une information officielle tombe.",
+    ],
+    cover: "/images/hero.jpg",
+    coverAlt:
+      "Une ville tropicale au bord de l'océan illuminée de néons verts, évoquant Vice City dans GTA 6",
+    keywords: [
+      "GTA 6",
+      "GTA VI",
+      "GTA 6 date de sortie",
+      "GTA 6 trailer",
+      "GTA 6 précommande",
+      "GTA 6 PC",
+    ],
+    releaseIso: "2026-11-19T00:00:00Z",
+    releaseLabel: "19 novembre 2026",
+    platforms: ["PS5", "Xbox Series X|S"],
+  },
+];
+
+export function getGame(slug: string): Game | undefined {
+  return games.find((g) => g.slug === slug);
+}

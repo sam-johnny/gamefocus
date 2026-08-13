@@ -1,7 +1,7 @@
 import type { Block } from "@/lib/articles";
 
 /** Rend le **gras** inline contenu dans les textes. */
-function Rich({ text }: { text: string }) {
+export function Rich({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return (
     <>

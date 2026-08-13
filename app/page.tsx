@@ -5,7 +5,8 @@ import Countdown from "@/components/Countdown";
 import Reveal from "@/components/Reveal";
 import ArticleCard from "@/components/ArticleCard";
 import AdSlot from "@/components/AdSlot";
-import { articles } from "@/lib/articles";
+import { articles, articleUrl } from "@/lib/articles";
+import { games } from "@/lib/games";
 
 export default function Home() {
   const [featured, ...rest] = articles;
@@ -36,7 +37,7 @@ export default function Home() {
             précommandes et rumeurs vérifiées.
           </p>
           <div className="hero-cta">
-            <Link href={`/articles/${featured.slug}/`} className="btn btn-primary">
+            <Link href={articleUrl(featured)} className="btn btn-primary">
               Lire le guide GTA 6
             </Link>
             <Link href="#articles" className="btn btn-ghost">
@@ -66,12 +67,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= À LA UNE ================= */}
+      {/* ================= DOSSIERS PAR JEU ================= */}
       <section className="section">
         <div className="container">
           <Reveal>
             <div className="section-head">
               <span className="section-index">02</span>
+              <h2 className="section-title">Nos dossiers</h2>
+              <span className="section-note">JEU PAR JEU</span>
+            </div>
+          </Reveal>
+          <div className="hubs-grid">
+            {games.map((game, i) => (
+              <Reveal key={game.slug} delay={i * 90}>
+                <Link href={`/${game.slug}/`} className="hub-card">
+                  <div className="hub-card-media">
+                    <img src={game.cover} alt={game.coverAlt} loading="lazy" />
+                  </div>
+                  <div className="hub-card-body">
+                    <h3 className="hub-card-title">{game.shortName}</h3>
+                    <p className="hub-card-tagline">{game.tagline}</p>
+                    <span className="card-more">
+                      Tout le dossier <span aria-hidden="true">→</span>
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= À LA UNE ================= */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <div className="section-head">
+              <span className="section-index">03</span>
               <h2 className="section-title">À la une</h2>
               <span className="section-note">LE GUIDE DE RÉFÉRENCE</span>
             </div>
@@ -89,9 +121,9 @@ export default function Home() {
         <div className="container">
           <Reveal>
             <div className="section-head">
-              <span className="section-index">03</span>
+              <span className="section-index">04</span>
               <h2 className="section-title">Derniers articles</h2>
-              <span className="section-note">DOSSIER GTA 6</span>
+              <span className="section-note">TOUS LES JEUX</span>
             </div>
           </Reveal>
           <div className="articles-grid">
@@ -131,3 +163,4 @@ export default function Home() {
     </>
   );
 }
+
