@@ -1,0 +1,7 @@
+# Redirections 301 des anciennes URLs (avant le cocon sémantique par jeu)
+# Pris en charge par Netlify et Cloudflare Pages (fichier copié tel quel dans dist/)
+/articles/gta-6-date-de-sortie-prix-editions-precommande/        /gta-6/date-de-sortie-prix-editions-precommande/        301
+/articles/gta-6-trailer-3-quand-sortira-prochaine-bande-annonce/ /gta-6/trailer-3-quand-sortira-prochaine-bande-annonce/ 301
+/articles/gta-6-histoire-lucia-jason-leonida-vice-city/          /gta-6/histoire-lucia-jason-leonida-vice-city/          301
+/articles/gta-6-pc-quand-sortira-version-pc/                     /gta-6/pc-quand-sortira-version-pc/                     301
+/articles/gta-6-gta-online-avenir-nouveau-mode-en-ligne/         /gta-6/gta-online-avenir-nouveau-mode-en-ligne/         301
