@@ -1,0 +1,42 @@
+import Link from "next/link";
+import { articles } from "@/lib/articles";
+
+export default function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div className="footer-col">
+          <p className="footer-title">GameFocus</p>
+          <p className="footer-text">
+            Le blog des joueurs impatients. Actualités, guides et analyses sur les
+            jeux vidéo qui comptent — en ce moment, tout sur GTA 6.
+          </p>
+        </div>
+        <nav className="footer-col" aria-label="Articles du footer">
+          <p className="footer-heading">Derniers articles</p>
+          {articles.slice(0, 4).map((a) => (
+            <Link key={a.slug} href={`/articles/${a.slug}/`} className="footer-link">
+              {a.shortTitle}
+            </Link>
+          ))}
+        </nav>
+        <nav className="footer-col" aria-label="Liens du site">
+          <p className="footer-heading">Le site</p>
+          <Link href="/" className="footer-link">Accueil</Link>
+          <Link href="/#articles" className="footer-link">Articles</Link>
+          <Link href="/a-propos/" className="footer-link">À propos</Link>
+        </nav>
+      </div>
+      <div className="footer-giant" aria-hidden="true">
+        <span>GAMEFOCUS</span>
+      </div>
+      <div className="container footer-bottom">
+        <span>© 2026 GameFocus — Tous droits réservés.</span>
+        <span>
+          GTA, Grand Theft Auto et Rockstar Games sont des marques de Take-Two
+          Interactive. Site de fans, non affilié.
+        </span>
+      </div>
+    </footer>
+  );
+}
