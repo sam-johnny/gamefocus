@@ -1,5 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
+import { isRecord, fail, requireString, requireStringArray, optionalString } from "@/lib/validate";
+
 export type Game = {
-  slug: string;
+  slug: string; // nom du dossier dans content/ (injecté par le loader)
   name: string;
   shortName: string;
   tagline: string;
@@ -11,36 +15,75 @@ export type Game = {
   releaseIso?: string; // date de sortie ISO, si connue
   releaseLabel: string;
   platforms: string[];
+  // Thème optionnel : surcharge les variables CSS --accent* sur les pages du jeu.
+  // Sans theme, le jeu hérite de la palette par défaut (noir forêt + néon lime).
+  theme?: {
+    accent?: string; // couleur principale (ex. "#ff4655")
+    accent2?: string; // variante claire de l'accent
+    accentSoft?: string; // fond translucide de l'accent (ex. "rgba(255, 70, 85, 0.12)")
+  };
 };
 
-export const games: Game[] = [
-  {
-    slug: "gta-6",
-    name: "Grand Theft Auto VI",
-    shortName: "GTA 6",
-    tagline: "Date de sortie, trailers, précommandes et rumeurs vérifiées",
-    description:
-      "Toute l'actualité de GTA 6 : date de sortie confirmée au 19 novembre 2026, trailers, précommandes, éditions, version PC, histoire de Lucia et Jason et avenir de GTA Online. Guides et analyses mis à jour.",
-    intro: [
-      "Treize ans après GTA V, **Grand Theft Auto VI** est le jeu le plus attendu de la décennie. Sortie officielle : le **19 novembre 2026** sur **PlayStation 5** et **Xbox Series X|S**. Retour à Vice City, deux protagonistes (Lucia et Jason), et un état de Leonida entièrement à explorer.",
-      "Ce dossier rassemble **toute l'actualité vérifiée de GTA 6** : date de sortie, prix et éditions en précommande, analyse des trailers, histoire et personnages, version PC et avenir du mode en ligne. Chaque annonce de Rockstar Games est décryptée et les pages sont mises à jour dès qu'une information officielle tombe.",
-    ],
-    cover: "/images/hero.jpg",
-    coverAlt:
-      "Une ville tropicale au bord de l'océan illuminée de néons verts, évoquant Vice City dans GTA 6",
-    keywords: [
-      "GTA 6",
-      "GTA VI",
-      "GTA 6 date de sortie",
-      "GTA 6 trailer",
-      "GTA 6 précommande",
-      "GTA 6 PC",
-    ],
-    releaseIso: "2026-11-19T00:00:00Z",
-    releaseLabel: "19 novembre 2026",
-    platforms: ["PS5", "Xbox Series X|S"],
-  },
-];
+// ---------------------------------------------------------------------------
+// Chargement et validation des jeux (content/<jeu>/_jeu.json)
+// Le contenu est validé au build : toute erreur fait échouer la compilation.
+// ---------------------------------------------------------------------------
+
+const CONTENT_DIR = path.join(process.cwd(), "content");
+const GAME_FILE = "_jeu.json"; // préfixe « _ » : ignoré par le loader d'articles
+
+function validateGame(raw: unknown, slug: string, file: string): Game {
+  if (!isRecord(raw)) fail(file, "le JSON doit être un objet");
+
+  let theme: Game["theme"];
+  if (raw.theme !== undefined) {
+    if (!isRecord(raw.theme)) fail(file, "« theme » doit être un objet");
+    theme = {
+      accent: optionalString(raw.theme, "accent", file),
+      accent2: optionalString(raw.theme, "accent2", file),
+      accentSoft: optionalString(raw.theme, "accentSoft", file),
+    };
+  }
+
+  return {
+    slug,
+    name: requireString(raw, "name", file),
+    shortName: requireString(raw, "shortName", file),
+    tagline: requireString(raw, "tagline", file),
+    description: requireString(raw, "description", file),
+    intro: requireStringArray(raw, "intro", file),
+    cover: requireString(raw, "cover", file),
+    coverAlt: requireString(raw, "coverAlt", file),
+    keywords: requireStringArray(raw, "keywords", file),
+    releaseIso: optionalString(raw, "releaseIso", file),
+    releaseLabel: requireString(raw, "releaseLabel", file),
+    platforms: requireStringArray(raw, "platforms", file),
+    theme,
+  };
+}
+
+/** Lit et valide tous les jeux définis dans content/<jeu>/_jeu.json. */
+function loadGames(): Game[] {
+  const loaded: Game[] = [];
+  for (const slug of fs.readdirSync(CONTENT_DIR).sort()) {
+    const gameDir = path.join(CONTENT_DIR, slug);
+    if (!fs.statSync(gameDir).isDirectory()) continue;
+    const gameFile = path.join(gameDir, GAME_FILE);
+    if (!fs.existsSync(gameFile)) {
+      fail(`${slug}/`, `définition du jeu manquante (${GAME_FILE})`);
+    }
+    let raw: unknown;
+    try {
+      raw = JSON.parse(fs.readFileSync(gameFile, "utf8"));
+    } catch {
+      fail(`${slug}/${GAME_FILE}`, "JSON invalide");
+    }
+    loaded.push(validateGame(raw, slug, `${slug}/${GAME_FILE}`));
+  }
+  return loaded;
+}
+
+export const games: Game[] = loadGames();
 
 export function getGame(slug: string): Game | undefined {
   return games.find((g) => g.slug === slug);

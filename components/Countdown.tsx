@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GTA_RELEASE_ISO } from "@/lib/articles";
+import { GTA_RELEASE_ISO } from "@/lib/site";
 
 type Left = { d: number; h: number; m: number; s: number; total: number };
 

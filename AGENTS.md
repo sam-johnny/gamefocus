@@ -4,7 +4,7 @@
 
 ## Aperçu du projet
 
-**GameFocus** est un site d'actualité jeux vidéo en français, organisé en **cocon sémantique par jeu** : chaque jeu a son dossier (page hub pilier) regroupant ses news, guides et analyses. Premier dossier : **GTA 6**. C'est un site **100 % statique** : aucune base de données, aucune API, aucun backend. Tout le contenu éditorial est codé en dur dans le dépôt.
+**GameFocus** est un site d'actualité jeux vidéo en français, organisé en **cocon sémantique par jeu** : chaque jeu a son dossier (page hub pilier) regroupant ses news, guides et analyses. Premier dossier : **GTA 6**. C'est un site **100 % statique** : aucune base de données, aucune API, aucun backend. Tout le contenu éditorial est en **fichiers JSON** dans `content/<jeu>/` (un fichier par article), chargés et validés au build — pensé pour être généré par un agent IA sans toucher au code.
 
 **Objectif du site : générer du trafic organique (SEO) pour le monétiser ensuite via Google AdSense.** Toute évolution doit servir cet objectif : maillage interne fort, pages piliers par jeu, contenus à forte intention de recherche, données structurées complètes. Les emplacements pubs (`AdSlot`) sont déjà prévus dans les pages.
 
@@ -58,6 +58,8 @@ app/                    pages Next.js (App Router)
                         Header/Footer, lang="fr"
   page.tsx              accueil : hero (ParticleField), Marquee, compte à rebours,
                         cartes des dossiers (hubs), grille d'articles, AdSlot
+  [game]/layout.tsx      layout du jeu : applique game.theme (surcharge des
+                         variables CSS --accent*) sur le hub et ses articles
   [game]/page.tsx       page hub par jeu : generateStaticParams + dynamicParams = false,
                         métadonnées + canonical, JSON-LD CollectionPage/ItemList &
                         BreadcrumbList, intro SEO, infos clés, articles du jeu, AdSlot
@@ -70,9 +72,11 @@ app/                    pages Next.js (App Router)
   globals.css           design system complet (variables CSS, classes utilitaires .container,
                         .btn, .section-head, .prose, .article-*, .hub-*, etc.)
   icon.svg              favicon
-lib/games.ts            les JEUX (hubs) : slug, nom, description SEO, intro, visuel,
-                        date de sortie, plateformes + getGame(slug)
-lib/articles.ts         contenu éditorial + constantes — LE point d'entrée du contenu
+lib/games.ts            loader + validateur des jeux (type Game + getGame)
+lib/articles.ts         loader + validateur des articles — LE point d'entrée du contenu
+lib/site.ts             constantes SITE / GTA_RELEASE_ISO (sans Node, importable côté client)
+lib/validate.ts         validateurs partagés par les loaders (fail → build cassé)
+content/<jeu>/          un dossier par JEU : _jeu.json (définition) + <slug>.json (articles)
 components/             composants réutilisables (voir ci-dessous)
 public/images/          visuels — ABSENT DU DÉPÔT (illustrations générées par IA,
                         à copier depuis l'environnement de build ; référencées en /images/*.jpg)
@@ -80,27 +84,88 @@ public/images/          visuels — ABSENT DU DÉPÔT (illustrations générées
 
 `dist/`, `out/`, `.next/` et `node_modules/` sont gitignorés.
 
-### `lib/games.ts` — les dossiers par jeu
+### `content/<jeu>/_jeu.json` — la définition du jeu
+
+**Un fichier `_jeu.json` par dossier de jeu** (le préfixe `_` l'exclut du loader d'articles). Le slug du jeu est le nom du dossier. Un jeu se crée donc entièrement par fichiers, sans toucher au code.
+
+Schéma (tous les champs sont **requis**, sauf `releaseIso` et `theme`) :
+
+```json
+{
+  "name": "Nom complet du jeu",
+  "shortName": "Nom court (nav, fil d'Ariane)",
+  "tagline": "Accroche courte (cartes, encadrés)",
+  "description": "Meta description SEO du hub",
+  "intro": ["Paragraphes du hub, **gras** possible"],
+  "cover": "/images/visuel-du-jeu.jpg",
+  "coverAlt": "Description d'image détaillée, en français",
+  "keywords": ["mot-clé 1", "mot-clé 2"],
+  "releaseIso": "2026-11-19T00:00:00Z",
+  "releaseLabel": "19 novembre 2026",
+  "platforms": ["PS5", "Xbox Series X|S"],
+  "theme": {
+    "accent": "#ff4655",
+    "accent2": "#ffb3ba",
+    "accentSoft": "rgba(255, 70, 85, 0.12)"
+  }
+}
+```
+
+**Thème par jeu** : `theme` surcharge les variables CSS `--accent`, `--accent-2` et `--accent-soft` sur toutes les pages du jeu (hub + articles), via `app/[game]/layout.tsx`. Sans `theme`, le jeu hérite de la palette par défaut (noir forêt + néon lime).
+
+**Ajouter un jeu** : créer `content/<slug-du-jeu>/_jeu.json` + ses articles JSON dans le même dossier — le hub `/<jeu>/`, la nav, le footer, l'accueil et le sitemap sont générés automatiquement au build. L'ordre d'affichage des jeux suit l'ordre alphabétique des dossiers.
+
+### `lib/games.ts` — loader des jeux
+
+Exporte le type `Game` (le `slug` y est injecté par le loader — **ne pas le mettre dans le JSON**), `games: Game[]` chargés depuis `content/*/_jeu.json` au build, et `getGame(slug)`. Même validation au build que les articles.
+
+### `content/<jeu>/` — les articles en JSON
+
+**Un fichier JSON par article : `content/<jeu>/<slug>.json`.** Le nom du fichier est le slug (sans le nom du jeu, déjà dans l'URL) ; le jeu est déduit du dossier. C'est le format à produire pour toute génération de contenu par IA — aucun code à modifier.
+
+Schéma d'un article (tous les champs sont **requis**, sauf `source`/`caption` dans les blocs) :
+
+```json
+{
+  "title": "Titre complet (H1 + balise title)",
+  "shortTitle": "Titre court (footer, cartes)",
+  "description": "Meta description SEO (~150 caractères)",
+  "excerpt": "Chapô affiché sur les cartes",
+  "category": "Guide | News | Analyse…",
+  "date": "2026-08-10",
+  "updatedAt": "2026-08-13",
+  "readingTime": 8,
+  "cover": "/images/mon-visuel.jpg",
+  "coverAlt": "Description d'image détaillée, en français",
+  "keywords": ["mot-clé 1", "mot-clé 2"],
+  "keyPoints": ["L'essentiel, 3 à 6 puces"],
+  "blocks": [
+    { "type": "p", "text": "Paragraphe, **gras** possible" },
+    { "type": "h2", "text": "Intertitre" },
+    { "type": "h3", "text": "Sous-intertitre" },
+    { "type": "list", "items": ["Puce 1", "Puce 2"] },
+    { "type": "quote", "text": "Citation", "source": "Optionnel" },
+    { "type": "image", "src": "/images/x.jpg", "alt": "…", "caption": "Optionnel" }
+  ],
+  "faq": [{ "q": "Question ?", "a": "Réponse." }]
+}
+```
+
+**Validation au build** (`lib/articles.ts` + `lib/games.ts`) : toute erreur (champ manquant, bloc de type inconnu, dossier sans `_jeu.json`, JSON invalide) **fait échouer `npm run build`** avec un message `[content] <fichier> : <erreur>`. Ne pas contourner cette validation.
+
+**Ordre d'affichage** : les articles sont triés par `date` décroissante — le plus récent est mis « À la une » sur l'accueil et sert d'article pilier sur le hub.
+
+### `lib/articles.ts` — loader et constantes
 
 Exporte :
 
-- Le type `Game` : `slug`, `name`, `shortName`, `tagline`, `description` (meta SEO du hub), `intro` (paragraphes, supporte le `**gras**`), `cover`, `coverAlt`, `keywords`, `releaseIso` (optionnel), `releaseLabel`, `platforms`
-- `games: Game[]` : actuellement uniquement `gta-6`
-- Helper : `getGame(slug)`
-
-**Ajouter un jeu** : ajouter un objet dans `games` + rattacher des articles via leur champ `game` — le hub `/<jeu>/`, la nav, le footer, l'accueil et le sitemap sont générés automatiquement au build.
-
-### `lib/articles.ts` — le cœur éditorial
-
-Exporte :
-
-- Les types `Block` (union discriminée : `p` | `h2` | `h3` | `list` | `quote` | `image`), `FaqItem`, `Article`
+- Les types `Block` (union discriminée : `p` | `h2` | `h3` | `list` | `quote` | `image`), `FaqItem`, `Article` (le `slug` et le `game` y sont injectés par le loader — **ne pas les mettre dans le JSON**)
 - `SITE` : constantes globales (nom, URL `https://gamefocus.fr`, tagline, description SEO)
 - `GTA_RELEASE_ISO = "2026-11-19T00:00:00Z"` : date de sortie utilisée par le compte à rebours
-- `articles: Article[]` : les articles complets (slug, **game** = slug du jeu, titre, description/excerpt SEO, dates ISO, temps de lecture, cover, mots-clés, keyPoints, blocks, faq)
+- `articles: Article[]` : chargés depuis `content/` au build (Node `fs`, côté serveur uniquement)
 - Helpers : `getArticle(slug)`, `getArticlesByGame(gameSlug)`, `articleUrl(article)` → `/<jeu>/<slug>/`, `formatDate(iso)` (format français long, UTC)
 
-**Ajouter un article** : ajouter un objet dans `articles` (avec son `game` correspondant à un `slug` de `lib/games.ts`) + son visuel dans `public/images/` — la page, le sitemap et les métadonnées sont générés automatiquement au build.
+**Ajouter un article** : créer `content/<jeu>/<slug>.json` (dans un dossier de jeu ayant son `_jeu.json`) + son visuel dans `public/images/` — la page, le sitemap et les métadonnées sont générés automatiquement au build.
 
 ### Composants (`components/`)
 

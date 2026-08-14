@@ -1,0 +1,81 @@
+{
+  "shortTitle": "GTA 6 sur PC",
+  "title": "GTA 6 sur PC : pourquoi il va falloir patienter (et combien de temps)",
+  "description": "Aucune date PC pour GTA 6 n'a été annoncée. En se basant sur l'historique de Rockstar — GTA V, Red Dead Redemption 2 — on estime la fenêtre de sortie la plus probable pour la version PC.",
+  "excerpt": "Consoles d'abord, PC ensuite : Rockstar ne déroge presque jamais à sa règle. Analyse de l'historique du studio pour estimer la fenêtre de sortie de GTA 6 sur PC.",
+  "category": "Analyse",
+  "date": "2026-08-02",
+  "updatedAt": "2026-08-11",
+  "readingTime": 6,
+  "cover": "/images/article-pc.jpg",
+  "coverAlt": "Un setup PC gaming haut de gamme aux ventilateurs RGB verts affichant une ville néon, symbolisant l'attente de GTA 6 sur PC",
+  "keywords": [
+    "GTA 6 PC",
+    "GTA 6 version PC",
+    "GTA 6 date PC",
+    "GTA VI PC 2027",
+    "GTA 6 config PC"
+  ],
+  "keyPoints": [
+    "GTA 6 sort le 19 novembre 2026 sur PS5 et Xbox Series X|S uniquement. Aucune date PC n'est annoncée.",
+    "GTA V avait mis 19 mois à passer des consoles au PC ; Red Dead Redemption 2, 13 mois.",
+    "La fenêtre la plus crédible pour GTA 6 sur PC : fin 2027, voire 2028.",
+    "La stratégie de la « double vente » consoles puis PC est historiquement très rentable pour Take-Two."
+  ],
+  "blocks": [
+    {
+      "type": "p",
+      "text": "Si vous jouez sur PC, autant le dire franchement : **il va falloir s'armer de patience**. GTA 6 sortira le 19 novembre 2026 sur PS5 et Xbox Series X|S — et Rockstar n'a soufflé mot d'une quelconque version PC. Aucune date, aucune fenêtre, pas même une confirmation officielle. Mais l'histoire du studio donne de solides indications."
+    },
+    {
+      "type": "h2",
+      "text": "Ce que dit l'historique de Rockstar"
+    },
+    {
+      "type": "p",
+      "text": "Le studio a une tradition bien établie : **consoles d'abord, PC ensuite**."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**GTA V** — sorti en septembre 2013 sur PS3/Xbox 360, porté sur PC en avril 2015, soit **19 mois** plus tard.",
+        "**Red Dead Redemption 2** — sorti en octobre 2018 sur consoles, arrivé sur PC en novembre 2019, soit **13 mois** plus tard.",
+        "**Red Dead Redemption premier du nom** — a attendu… 14 ans avant son portage PC en 2024."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Appliqué à GTA 6, ce rythme place la version PC entre **fin 2027 et 2028**. Rien d'officiel, mais une estimation bien plus crédible que les espoirs d'une sortie simultanée."
+    },
+    {
+      "type": "h2",
+      "text": "Pourquoi une telle attente ?"
+    },
+    {
+      "type": "p",
+      "text": "Deux raisons complémentaires. D'abord, la technique : Rockstar peaufine ses portages PC (options graphiques, framerates débloqués) plutôt que de livrer une conversion bâclée. Ensuite — et surtout — l'économie : échelonner les sorties permet à Take-Two de **vendre le jeu deux fois** à une partie de son public, d'abord sur console puis sur PC. Une stratégie assumée de longue date et qui a fait ses preuves : GTA V s'est écoulé à plus de 200 millions d'exemplaires sur trois générations de plateformes."
+    },
+    {
+      "type": "h2",
+      "text": "Que faire en attendant ?"
+    },
+    {
+      "type": "p",
+      "text": "Notre conseil : ne construisez pas votre config autour de GTA 6 pour l'instant. Les spécifications officielles n'existent pas, et les exigences réelles ne seront connues qu'à l'approche du portage. Profitez-en pour finir votre backlog — et si l'impatience est trop forte, la génération PS5 / Xbox Series reste la seule porte d'entrée vers Leonida en novembre 2026."
+    }
+  ],
+  "faq": [
+    {
+      "q": "GTA 6 sort-il sur PC en même temps que sur consoles ?",
+      "a": "Non. La sortie du 19 novembre 2026 ne concerne que la PS5 et la Xbox Series X|S. Rockstar n'a annoncé aucune date pour le PC."
+    },
+    {
+      "q": "Quand GTA 6 sortira-t-il sur PC ?",
+      "a": "Aucune date officielle n'existe. En se basant sur GTA V (19 mois d'écart) et Red Dead Redemption 2 (13 mois), une sortie entre fin 2027 et 2028 est l'hypothèse la plus crédible."
+    },
+    {
+      "q": "Quelle config PC faudra-t-il pour GTA 6 ?",
+      "a": "Les configurations requises ne sont pas connues et ne le seront probablement pas avant l'annonce officielle du portage PC. Méfiez-vous des « configs » qui circulent : ce sont des spéculations."
+    }
+  ]
+}

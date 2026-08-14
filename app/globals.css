@@ -539,7 +539,7 @@ ul { list-style: none; }
 .chip {
   background: var(--accent-soft);
   color: var(--accent);
-  border: 1px solid rgba(191, 250, 0, 0.35);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
   padding: 3px 10px;
   border-radius: 99px;
   font-weight: 700;
