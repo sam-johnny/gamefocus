@@ -34,11 +34,12 @@ export default function Home() {
           <p className="hero-sub">
             Nouveautés jeux vidéo, guides et analyses. En ce moment :
             dossier complet sur <strong>GTA 6</strong> — sortie, trailers,
-            précommandes et rumeurs vérifiées.
+            précommandes — et tout <strong>Palworld</strong> : version 1.0,
+            World Tree, élevage et astuces.
           </p>
           <div className="hero-cta">
             <Link href={articleUrl(featured)} className="btn btn-primary">
-              Lire le guide GTA 6
+              Lire : {featured.shortTitle}
             </Link>
             <Link href="#articles" className="btn btn-ghost">
               Tous les articles
@@ -148,8 +149,8 @@ export default function Home() {
                 Vous le saurez en premier.
               </h2>
               <p className="follow-text">
-                Ajoutez NeonActu à vos favoris : chaque annonce Rockstar est
-                décryptée dans l'heure.
+                Ajoutez NeonActu à vos favoris : chaque annonce Rockstar ou
+                Pocketpair est décryptée dans l'heure.
               </p>
             </div>
           </Reveal>
