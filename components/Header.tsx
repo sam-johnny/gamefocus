@@ -12,11 +12,11 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="header-meta container">
-        <span>ÉDITION N°01</span>
+        <span>ÉDITION N°02</span>
         <span className="header-meta-sep" aria-hidden="true">/</span>
-        <span>13 AOÛT 2026</span>
+        <span>15 AOÛT 2026</span>
         <span className="header-meta-sep" aria-hidden="true">/</span>
-        <span>DOSSIER SPÉCIAL GTA 6</span>
+        <span>DOSSIERS GTA 6 × PALWORLD</span>
       </div>
       <div className="header-main container">
         <Link href="/" className="logo" aria-label="NeonActu — retour à l'accueil">

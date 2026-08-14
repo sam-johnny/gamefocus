@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 const ITEMS = [
   "GTA 6 — SORTIE LE 19 NOVEMBRE 2026",
   "PRÉCOMMANDES OUVERTES",
+  "PALWORLD 1.0 DISPONIBLE",
+  "WORLD TREE · SKY ISLANDS",
+  "PS5 · XBOX SERIES X|S · PC",
   "TRAILER 3 IMMINENT",
-  "PS5 · XBOX SERIES X|S",
   "VICE CITY · ÉTAT DE LEONIDA",
-  "LUCIA & JASON",
+  "ÉLEVAGE & GENETIC RECOMBINATION",
 ];
 
 function useClock() {

@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="footer-title">NeonActu</p>
           <p className="footer-text">
             Le blog des joueurs impatients. Actualités, guides et analyses sur les
-            jeux vidéo qui comptent — en ce moment, tout sur GTA 6.
+            jeux vidéo qui comptent — en ce moment, tout sur GTA 6 et Palworld.
           </p>
         </div>
         <nav className="footer-col" aria-label="Dossiers par jeu">
@@ -43,7 +43,8 @@ export default function Footer() {
         <span>© 2026 NeonActu — Tous droits réservés.</span>
         <span>
           GTA, Grand Theft Auto et Rockstar Games sont des marques de Take-Two
-          Interactive. Site de fans, non affilié.
+          Interactive. Palworld est une marque de Pocketpair. Site de fans, non
+          affilié.
         </span>
       </div>
     </footer>
