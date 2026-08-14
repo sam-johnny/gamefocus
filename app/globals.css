@@ -3,7 +3,8 @@
    Thème automatique clair/sombre (suit le système, choix manuel
    mémorisé via [data-theme] sur <html>). Palette sombre : nuit
    violette + cyan ; palette claire : papier chaud + violet profond.
-   Le dossier GTA 6 surcharge les accents (.game-gta-6).
+   Le dossier GTA 6 surcharge les accents (.game-gta-6),
+   le dossier Palworld aussi (.game-palworld).
    ============================================================ */
 
 /* ---------- Jetons : thème sombre (défaut) ---------- */
@@ -1358,6 +1359,105 @@ ul { list-style: none; }
 /* Sélection de texte aux couleurs du dossier */
 
 .game-gta-6 ::selection { background: var(--accent); color: #fff; }
+
+/* ============================================================
+   Dossier Palworld — direction artistique « îles Palpagos »
+   Les accents (--accent, --accent-2, --accent-soft) sont injectés
+   par app/[game]/layout.tsx depuis content/palworld/_jeu.json
+   (cyan lagon + vert prairie). Ici : les ornements propres au jeu.
+   ============================================================ */
+
+/* Halo d'aube tropicale au sommet du hub et des articles du dossier
+   (origines inversées par rapport au dossier GTA 6) */
+
+.game-palworld .hub-page::before,
+.game-palworld .article-page::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 460px;
+  background:
+    radial-gradient(52% 68% at 16% 0%, color-mix(in srgb, var(--accent-2) 15%, transparent), transparent 62%),
+    radial-gradient(58% 78% at 90% 8%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 64%);
+  pointer-events: none;
+}
+
+.game-palworld .article-page { position: relative; }
+
+/* Titres en dégradé cyan → vert, signature Palpagos */
+
+.game-palworld .article-title,
+.game-palworld .section-title {
+  background: linear-gradient(96deg, var(--accent) 8%, var(--accent-2) 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Le filet d'accent des intertitres passe en dégradé vertical */
+
+.game-palworld .prose h2,
+.game-palworld .faq-title {
+  border-left: 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.game-palworld .prose h2::before,
+.game-palworld .faq-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  bottom: 0.08em;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+
+/* Couvertures : cadre néon cyan avec lueur lagon */
+
+.game-palworld .article-cover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 22px 60px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+/* Encadré « L'essentiel » : fond aube naissante */
+
+.game-palworld .keypoints {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background:
+    radial-gradient(130% 170% at 0% 0%, var(--accent-soft), transparent 58%),
+    radial-gradient(120% 160% at 100% 100%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 55%),
+    var(--bg-raise);
+}
+
+/* Citations et encadrés latéraux teintés */
+
+.game-palworld .prose blockquote {
+  border-left: 0;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(120deg, var(--accent-soft), transparent 70%),
+    var(--bg-raise);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.game-palworld .aside-box {
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* Survol des cartes du dossier : lueur cyan */
+
+.game-palworld .card:hover {
+  box-shadow: 0 20px 54px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Sélection de texte aux couleurs du dossier */
+
+.game-palworld ::selection { background: var(--accent); color: #03211d; }
 
 /* ============ Responsive ============ */
 
