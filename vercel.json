@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/articles/gta-6-date-de-sortie-prix-editions-precommande",
+      "destination": "/gta-6/date-de-sortie-prix-editions-precommande/",
+      "permanent": true
+    },
+    {
+      "source": "/articles/gta-6-trailer-3-quand-sortira-prochaine-bande-annonce",
+      "destination": "/gta-6/trailer-3-quand-sortira-prochaine-bande-annonce/",
+      "permanent": true
+    },
+    {
+      "source": "/articles/gta-6-histoire-lucia-jason-leonida-vice-city",
+      "destination": "/gta-6/histoire-lucia-jason-leonida-vice-city/",
+      "permanent": true
+    },
+    {
+      "source": "/articles/gta-6-pc-quand-sortira-version-pc",
+      "destination": "/gta-6/pc-quand-sortira-version-pc/",
+      "permanent": true
+    },
+    {
+      "source": "/articles/gta-6-gta-online-avenir-nouveau-mode-en-ligne",
+      "destination": "/gta-6/gta-online-avenir-nouveau-mode-en-ligne/",
+      "permanent": true
+    }
+  ]
+}
