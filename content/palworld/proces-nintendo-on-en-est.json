@@ -1,0 +1,92 @@
+{
+  "shortTitle": "Procès Nintendo",
+  "title": "Nintendo contre Palworld : où en est le procès, et que risque vraiment Pocketpair ?",
+  "description": "Procès Nintendo vs Pocketpair : brevets sur la capture de créatures, mécaniques modifiées, dommages plafonnés à 30 000 $ selon les experts, verdict attendu le 9 novembre 2026. Le point complet.",
+  "excerpt": "Deux ans après la plainte de Nintendo et The Pokémon Company, le procès contre Pocketpair touche à sa fin : brevets contestés, mécaniques modifiées, dommages potentiels dérisoires. Verdict attendu le 9 novembre 2026 — on fait le point.",
+  "category": "News",
+  "date": "2026-08-12",
+  "updatedAt": "2026-08-15",
+  "readingTime": 6,
+  "cover": "/images/article-palworld-nintendo.svg",
+  "coverAlt": "Balance de la justice tracée en néon rouge et cyan sur un ciel d'orage indigo — le procès entre Nintendo et Pocketpair autour de Palworld",
+  "keywords": [
+    "Palworld procès",
+    "Nintendo Pocketpair",
+    "Palworld Nintendo",
+    "Palworld brevet",
+    "Palworld Pokémon procès",
+    "Palworld verdict"
+  ],
+  "keyPoints": [
+    "Nintendo et The Pokémon Company attaquent Pocketpair depuis septembre 2024 sur des brevets de gameplay, pas sur le design des créatures.",
+    "Pocketpair a modifié plusieurs mécaniques en cours de route : fin du lancer de sphère (novembre 2024), planeur à la place des montures volantes (mai 2025).",
+    "Nintendo a restreint ses accusations aux anciennes versions du jeu : aucune injonction ne menace la version actuelle.",
+    "Même en cas de victoire, Nintendo ne pourrait espérer qu'environ 30 000 dollars de dommages, selon l'expert en propriété intellectuelle Florian Mueller.",
+    "Le verdict est attendu le 9 novembre 2026, après la présentation des preuves prévue le 1er octobre."
+  ],
+  "blocks": [
+    {
+      "type": "p",
+      "text": "C'est l'affaire juridique la plus suivie du jeu vidéo japonais : depuis **septembre 2024**, **Nintendo** et **The Pokémon Company** poursuivent **Pocketpair**, le studio de Palworld, devant la justice japonaise. Deux ans plus tard, le dossier entre dans sa dernière ligne droite — et il pourrait bien se terminer en pétard mouillé."
+    },
+    {
+      "type": "h2",
+      "text": "Des brevets, pas des droits d'auteur"
+    },
+    {
+      "type": "p",
+      "text": "Contrairement à une idée répandue, Nintendo n'a **jamais attaqué Palworld pour plagiat de design**. La plainte vise des **brevets sur des mécaniques de gameplay** : la capture de créatures par lancer d'un objet sphérique, le système de visée associé, et le fait de chevaucher des créatures. Détail capital : ces brevets — des demandes divisionnaires — ont été **déposés après** la sortie de l'accès anticipé de Palworld en janvier 2024."
+    },
+    {
+      "type": "h2",
+      "text": "Les « compromis » de Pocketpair"
+    },
+    {
+      "type": "p",
+      "text": "Pour se prémunir d'une injonction qui aurait bloqué la vente du jeu, Pocketpair a modifié Palworld à deux reprises. En **novembre 2024**, le Pal invoqué ne sort plus de sa sphère : il apparaît directement à côté du joueur. En **mai 2025**, les déplacements aériens à dos de Pal volant laissent place à un **planeur**. Le studio n'a pas caché que ces changements lui coûtaient :"
+    },
+    {
+      "type": "quote",
+      "text": "Nous comprenons que cela sera décevant pour beaucoup, tout comme pour nous, mais nous espérons que nos fans comprendront que ces changements sont nécessaires pour éviter d'autres perturbations dans le développement de Palworld.",
+      "source": "Pocketpair, communiqué officiel (mai 2025)"
+    },
+    {
+      "type": "h2",
+      "text": "Pourquoi Nintendo risque peu de gagner gros"
+    },
+    {
+      "type": "p",
+      "text": "Fin 2025, Nintendo et The Pokémon Company ont **restreint la portée de leurs accusations aux anciennes versions** du jeu — celles d'avant les modifications. Selon l'expert en propriété intellectuelle **Florian Mueller**, il n'existe « aucune possibilité » que Nintendo l'emporte contre les versions actuelles de Palworld, 1.0 comprise : **aucune injonction ayant un impact concret** n'est envisageable. Et même en cas de victoire sur les anciennes versions, la période d'infraction serait si courte — et limitée aux ventes japonaises — que les dommages plafonneraient autour de **30 000 dollars**, « une broutille comparée aux frais de justice »."
+    },
+    {
+      "type": "p",
+      "text": "La firme de Kyoto a d'ailleurs essuyé plusieurs revers en chemin : en **avril 2026**, l'office américain des brevets (USPTO) a rejeté son brevet visant à « invoquer un personnage et le faire combattre » ; en **mai 2026**, l'office japonais (JPO) a refusé un brevet sur la **capture de monstres par écran tactile**, qui visait clairement **Palworld Mobile**, le projet toujours en développement chez Krafton."
+    },
+    {
+      "type": "h2",
+      "text": "Le calendrier de la fin du procès"
+    },
+    {
+      "type": "p",
+      "text": "La présentation des preuves est programmée au **1er octobre 2026** et le tribunal rendra sa décision le **9 novembre 2026**. Pour les joueurs, l'affaire n'a donc concrètement changé que deux mécaniques de jeu — et Palworld, lui, a continué à grandir pendant le procès, jusqu'à la sortie de sa version 1.0 le 10 juillet 2026."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Palworld risque-t-il d'être retiré de la vente ?",
+      "a": "Non, c'est très improbable. Nintendo a restreint ses accusations aux anciennes versions du jeu, et selon l'expert Florian Mueller, aucune injonction ayant un impact concret ne peut viser les versions actuelles, 1.0 comprise."
+    },
+    {
+      "q": "Quand aura lieu le verdict du procès Nintendo contre Pocketpair ?",
+      "a": "Le tribunal japonais rendra sa décision le 9 novembre 2026, après la présentation des preuves prévue le 1er octobre 2026."
+    },
+    {
+      "q": "Combien Nintendo peut-il gagner dans le procès contre Palworld ?",
+      "a": "Au mieux environ 30 000 dollars (5 millions de yens par plaignant), selon l'analyse de l'expert Florian Mueller : la période d'infraction potentielle est courte et limitée aux ventes au Japon."
+    },
+    {
+      "q": "Le procès concerne-t-il le design des Pals ?",
+      "a": "Non. Nintendo et The Pokémon Company n'ont pas attaqué sur les droits d'auteur mais sur des brevets de mécaniques de gameplay : capture par objet sphérique, visée et montures."
+    }
+  ]
+}

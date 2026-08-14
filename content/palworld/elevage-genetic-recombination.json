@@ -1,0 +1,92 @@
+{
+  "shortTitle": "Élevage & Genetic Recombination",
+  "title": "Élevage dans Palworld : ferme, passifs, combos et Genetic Recombination — le guide",
+  "description": "Guide élevage Palworld 1.0 : ferme d'élevage et gâteaux, transmission des passifs, combos de reproduction, et la Genetic Recombination qui fusionne les gènes des Pals légendaires.",
+  "excerpt": "La ferme d'élevage, le gâteau obligatoire, l'héritage des passifs et la Genetic Recombination de la 1.0 : tout pour produire des Pals sur mesure, du parfait ouvrier au monstre de combat.",
+  "category": "Guide",
+  "date": "2026-08-11",
+  "updatedAt": "2026-08-15",
+  "readingTime": 8,
+  "cover": "/images/article-palworld-elevage.svg",
+  "coverAlt": "Œuf moucheté dessiné en néon rose et or devant un crépuscule chaud sur les îles Palpagos — l'élevage des Pals dans Palworld",
+  "keywords": [
+    "Palworld élevage",
+    "Palworld breeding",
+    "Palworld Genetic Recombination",
+    "Palworld combos reproduction",
+    "Palworld passifs",
+    "Palworld ferme d'élevage"
+  ],
+  "keyPoints": [
+    "L'élevage se débloque avec la ferme d'élevage — et chaque portée exige un gâteau.",
+    "Les passifs des parents se transmettent à la descendance : cumulez les bons avant de vous lancer.",
+    "Certaines combinaisons de parents produisent des Pals précis, parfois impossibles à capturer autrement.",
+    "La Genetic Recombination (1.0) fusionne les gènes de deux Pals légendaires en variantes uniques.",
+    "Les capacités peuvent désormais s'hériter entre générations : l'élevage devient un vrai système de build."
+  ],
+  "blocks": [
+    {
+      "type": "p",
+      "text": "Capturer un bon Pal, c'est bien. **Produire** exactement le Pal dont vous avez besoin, c'est mieux. Depuis toujours, l'élevage est la mécanique la plus puissante de Palworld pour les joueurs patients — et la **version 1.0** l'a transformée avec la **Genetic Recombination**. Voici comment tirer le maximum de votre ferme."
+    },
+    {
+      "type": "h2",
+      "text": "Les bases : ferme d'élevage et gâteau"
+    },
+    {
+      "type": "p",
+      "text": "L'élevage se débloque dans l'arbre de technologie avec la **ferme d'élevage**. Le principe est simple : placez-y un Pal mâle et une Pal femelle, ajoutez un **gâteau** dans le coffre de la ferme, et un œuf finit par apparaître. Pas de gâteau, pas de portée — prévoyez donc une chaîne de production (farine, baies, lait, œufs, miel) via vos plantations et vos ranchs. L'œuf passe ensuite en **incubateur**, dont certains modèles accélèrent l'éclosion."
+    },
+    {
+      "type": "h2",
+      "text": "L'héritage des passifs : le vrai enjeu"
+    },
+    {
+      "type": "p",
+      "text": "Chaque Pal possède jusqu'à quatre **compétences passives**, et la descendance **hérite des passifs de ses parents**. C'est là que l'élevage devient stratégique : au lieu de chercher le Pal parfait à l'état sauvage, on construit une lignée."
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Pour un Pal de combat**, cumulez les passifs offensifs (bonus d'attaque, de vitesse, affinités élémentaires) sur les deux parents avant de lancer la portée.",
+        "**Pour un Pal de base**, privilégiez les passifs de travail : vitesse de production, réduction de la consommation de SAN et de nourriture.",
+        "**Éliminez les mauvais passifs** de vos reproducteurs : un malus hérité peut gâcher une lignée entière.",
+        "**Condensez vos doublons** : le condensateur de Pals permet de renforcer un spécimen en lui sacrifiant ses semblables."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Les combos de reproduction"
+    },
+    {
+      "type": "p",
+      "text": "L'espèce de l'œuf dépend du couple de parents : deux Pals de la même espèce donnent cette espèce, mais de nombreux **croisements produisent une espèce différente**, déterminée par le jeu. Certaines combinaisons spécifiques donnent des Pals rares, voire introuvables à l'état sauvage — un moyen détourné de compléter son Paldeck sans arpenter les zones de haut niveau. Expérimentez, ou consultez les tables de combos tenues par la communauté."
+    },
+    {
+      "type": "h2",
+      "text": "La Genetic Recombination, nouveauté de la 1.0"
+    },
+    {
+      "type": "p",
+      "text": "Ajoutée le 10 juillet 2026, la **Genetic Recombination** pousse la logique d'élevage à son sommet : elle permet de **fusionner les gènes de deux Pals légendaires** pour obtenir des variantes uniques, et les capacités peuvent désormais **s'hériter entre générations**. Concrètement, on ne « capture » plus son Pal parfait par chance : on le **construit**, génération après génération, pour le combat comme pour le travail. C'est le système qui structure l'endgame autour du World Tree — et une excellente raison de garder vos légendaires au chaud plutôt que de les laisser dormir dans la Palbox."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Comment débloquer l'élevage dans Palworld ?",
+      "a": "Via la ferme d'élevage dans l'arbre de technologie. Placez-y un mâle et une femelle, ajoutez un gâteau dans le coffre de la ferme, puis faites incuber l'œuf obtenu."
+    },
+    {
+      "q": "Les passifs des parents se transmettent-ils aux bébés Pals ?",
+      "a": "Oui. La descendance hérite des compétences passives de ses parents : cumuler les bons passifs sur les reproducteurs est la clé pour obtenir des Pals de combat ou de travail sur mesure."
+    },
+    {
+      "q": "Qu'est-ce que la Genetic Recombination dans Palworld 1.0 ?",
+      "a": "Un système ajouté avec la version 1.0 (10 juillet 2026) qui permet de fusionner les gènes de deux Pals légendaires pour créer des variantes uniques, avec des capacités héritables entre générations."
+    },
+    {
+      "q": "Peut-on obtenir des Pals impossibles à capturer par l'élevage ?",
+      "a": "Oui : certaines combinaisons de parents produisent des espèces précises, dont des Pals rares absents de la nature. Les tables de combos de la communauté répertorient ces croisements."
+    }
+  ]
+}
