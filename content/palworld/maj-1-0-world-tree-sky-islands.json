@@ -1,0 +1,93 @@
+{
+  "shortTitle": "La version 1.0",
+  "title": "Palworld 1.0 est sorti : World Tree, Sky Islands, PvP… tout ce qui change",
+  "description": "Palworld a quitté l'accès anticipé le 10 juillet 2026 : World Tree, Sky Islands, 27 nouveaux Pals, Genetic Recombination, PvP complet, crossplay et DLC Dawn of the Palpagos. Le point complet.",
+  "excerpt": "Après deux ans et demi d'accès anticipé et 40 millions de joueurs, Palworld 1.0 est arrivé le 10 juillet 2026 avec 27 pages de patch notes : World Tree, Sky Islands, PvP complet, crossplay généralisé. On fait le tri.",
+  "category": "News",
+  "date": "2026-08-14",
+  "updatedAt": "2026-08-15",
+  "readingTime": 7,
+  "cover": "/images/article-palworld-1-0.svg",
+  "coverAlt": "Arbre-monde gigantesque en silhouette néon turquoise devant un soleil cyan, au-dessus d'îles flottantes — le World Tree de Palworld 1.0",
+  "keywords": [
+    "Palworld 1.0",
+    "Palworld mise à jour",
+    "Palworld World Tree",
+    "Palworld Sky Islands",
+    "Palworld DLC",
+    "Palworld accès anticipé"
+  ],
+  "keyPoints": [
+    "Palworld 1.0 est sorti le 10 juillet 2026 sur PC, PS5, Xbox Series X|S, Xbox One et Mac — mise à jour gratuite, Game Pass inclus.",
+    "Le World Tree est enfin accessible : c'est le cœur de l'endgame et le décor de la fin de l'histoire.",
+    "Les Sky Islands font quasiment doubler la taille de la carte.",
+    "Le Paldeck dépasse les 200 Pals, dont 27 nouvelles créatures.",
+    "PvP complet, crossplay PC/Xbox/PS5 et correction du rubberbanding.",
+    "Un premier DLC payant, Dawn of the Palpagos, est arrivé le 30 juillet 2026."
+  ],
+  "blocks": [
+    {
+      "type": "p",
+      "text": "C'était l'une des sorties les plus attendues de l'été : **Palworld 1.0** est disponible depuis le **10 juillet 2026**, mettant fin à deux ans et demi d'accès anticipé commencé en janvier 2024. Annoncée au Summer Game Fest, la mise à jour est **gratuite** pour tous les possesseurs du jeu, disponible simultanément sur PC, PlayStation 5, Xbox Series X|S, Xbox One et Mac — et dans le Game Pass dès le premier jour. Pocketpair évoque **27 pages de notes de patch**, du jamais-vu pour le titre. Le studio célébrait au passage un cap : **40 millions de joueurs cumulés**, puis plus de **850 000 joueurs simultanés sur Steam** au lancement."
+    },
+    {
+      "type": "h2",
+      "text": "Le World Tree enfin accessible"
+    },
+    {
+      "type": "p",
+      "text": "Visible de presque partout sur la carte mais interdit d'accès depuis la sortie du jeu, le **World Tree** devient avec la 1.0 le cœur du contenu de fin de partie : une nouvelle région à explorer, un vrai **boss final** et la conclusion de l'histoire principale. Autour de lui, les **Sky Islands** — des îles flottantes — font quasiment **doubler la surface explorable**. Pour y accéder, le nouveau **Wing Pack** change la donne : cet équipement permet de planer sans dépendre d'un Pal volant monté."
+    },
+    {
+      "type": "h2",
+      "text": "27 nouveaux Pals et la Genetic Recombination"
+    },
+    {
+      "type": "p",
+      "text": "Le Paldeck franchit la barre des **200 créatures**, avec **27 nouveaux Pals** — un record pour une seule mise à jour. On y croise notamment Bull Dou, Dualith, Dupin, Lee Fan, Oidia, Seek ou Vanusa, ainsi que des légendaires taillés pour l'endgame. La vraie nouveauté systémique s'appelle la **Genetic Recombination** : elle permet de fusionner les gènes de deux Pals légendaires pour créer des variantes uniques, avec des capacités qui se transmettent entre générations. L'élevage devient un système de build à part entière — nous y consacrons un guide complet dans ce dossier."
+    },
+    {
+      "type": "h2",
+      "text": "PvP complet, crossplay et qualité de vie"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**PvP complet** : le mode joueur contre joueur, longtemps expérimental, devient un pilier du jeu avec un rééquilibrage dédié des dégâts et des résistances. Les bases ennemies détruites ne réapparaissent plus.",
+        "**Crossplay généralisé** entre PC, Xbox et PS5 (introduit à la base par la version 0.5.0 de mars 2025) : les amis jouent ensemble quelle que soit leur plateforme. Attention toutefois : pas de cross-progression complète — votre personnage ne suit pas d'une plateforme à l'autre.",
+        "**Rubberbanding corrigé** : le décalage réseau qui téléportait les joueurs en plein combat appartient au passé.",
+        "**Ergonomie revue** : la touche pour porter un Pal passe de F à V sur PC (X à Y sur manette) pour éviter les manipulations accidentelles en combat."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Une fonctionnalité annoncée reste en revanche introuvable dans les notes de patch du lancement : le **server clustering**, censé relier plusieurs instances pour accueillir davantage de joueurs dans un même univers. Considérez-le comme à venir plutôt que disponible."
+    },
+    {
+      "type": "h2",
+      "text": "Et maintenant ? DLC et correctifs"
+    },
+    {
+      "type": "p",
+      "text": "Pocketpair n'a pas chômé depuis le lancement : les patchs **1.0.1** (15 juillet) et **1.0.2** (29-30 juillet) ont corrigé les soucis de jeunesse, et le premier DLC payant, **Dawn of the Palpagos**, est arrivé dès le **30 juillet 2026**. Vos anciennes sauvegardes restent compatibles avec la 1.0, même si le studio recommande une nouvelle partie pour profiter de la refonte de la progression. Deux ans après le raz-de-marée du lancement, Palworld est donc officiellement « terminé » — mais visiblement loin d'être abandonné."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Quand est sorti Palworld 1.0 ?",
+      "a": "Palworld 1.0 est sorti le 10 juillet 2026 sur PC (Steam et Microsoft Store), PlayStation 5, Xbox Series X|S, Xbox One et Mac, avec le Game Pass dès le premier jour. La mise à jour est gratuite pour les possesseurs du jeu."
+    },
+    {
+      "q": "Qu'apporte la version 1.0 de Palworld ?",
+      "a": "Le World Tree enfin accessible avec un boss final, les Sky Islands qui doublent quasiment la carte, 27 nouveaux Pals (plus de 200 au total), la Genetic Recombination pour l'élevage, le PvP complet, le crossplay PC/Xbox/PS5, le Wing Pack et la correction du rubberbanding."
+    },
+    {
+      "q": "La sauvegarde d'avant la 1.0 est-elle compatible ?",
+      "a": "Oui, les sauvegardes existantes restent compatibles. Pocketpair recommande cependant de démarrer une nouvelle partie pour profiter pleinement de la refonte de la progression."
+    },
+    {
+      "q": "Palworld 1.0 est-il crossplay ?",
+      "a": "Oui : le crossplay entre PC, Xbox et PS5 est supporté (il existait depuis la version 0.5.0 de mars 2025). En revanche, il n'existe pas de cross-progression complète : votre personnage ne se transfère pas d'une plateforme à l'autre."
+    }
+  ]
+}

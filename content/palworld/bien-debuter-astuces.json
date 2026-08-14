@@ -1,0 +1,118 @@
+{
+  "shortTitle": "Bien débuter",
+  "title": "Palworld : 10 astuces pour bien débuter en version 1.0 (guide complet)",
+  "description": "Nos 10 astuces pour bien débuter dans Palworld 1.0 : capture de Pals, choix de la base, aptitudes au travail, gestion de la SAN, exploration et progression. Guide débutant à jour en août 2026.",
+  "excerpt": "Capturer efficacement, poser sa première base au bon endroit, exploiter les aptitudes au travail et garder ses Pals en forme : tout ce qu'il faut savoir pour réussir ses premières heures dans les îles Palpagos.",
+  "category": "Guide",
+  "date": "2026-08-15",
+  "updatedAt": "2026-08-15",
+  "readingTime": 9,
+  "cover": "/images/article-palworld-debuter.svg",
+  "coverAlt": "Aube verte et turquoise sur une plage tropicale ; une boussole néon flotte au-dessus des palmiers en silhouette, symbole du guide de démarrage de Palworld",
+  "keywords": [
+    "Palworld débuter",
+    "Palworld astuces",
+    "Palworld guide débutant",
+    "Palworld capture",
+    "Palworld base",
+    "Palworld tips"
+  ],
+  "keyPoints": [
+    "Blessez un Pal avant de lancer une sphère : plus ses PV sont bas, plus le taux de capture grimpe.",
+    "Frappez un Pal par derrière pour bénéficier d'un bonus de capture.",
+    "Posez votre première base près du bois, de la pierre et du minerai : les Pals y travailleront pour vous.",
+    "Chaque Pal a des aptitudes au travail (ignition, arrosage, minage…) : assignez le bon Pal à la bonne tâche.",
+    "Surveillez la SAN de vos Pals : lits de bonne qualité et nourriture variée évitent la déprime.",
+    "La version 1.0 a refondu la progression : démarrer une nouvelle partie est recommandé, mais pas obligatoire."
+  ],
+  "blocks": [
+    {
+      "type": "p",
+      "text": "Avec la **version 1.0** sortie le 10 juillet 2026, jamais Palworld n'a été aussi accueillant pour les nouveaux joueurs : progression refondue, rubberbanding corrigé, carte presque doublée avec les **Sky Islands**. Mais le jeu reste un survival exigeant, et les premières heures conditionnent tout le reste. Voici nos **10 astuces** pour démarrer du bon pied dans les îles Palpagos."
+    },
+    {
+      "type": "h2",
+      "text": "1 à 3 : maîtriser la capture dès le départ"
+    },
+    {
+      "type": "p",
+      "text": "La capture est le cœur de Palworld — et elle obéit à des règles précises que le jeu n'explique qu'à moitié :"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Affaiblissez toujours avant de capturer.** Le taux de capture augmente à mesure que les PV du Pal baissent. Arrêtez vos coups autour de 10 % de sa barre de vie pour éviter de l'achever.",
+        "**Attaquez par derrière.** Un lancer de sphère dans le dos d'un Pal qui ne vous a pas repéré bénéficie d'un bonus de capture non négligeable.",
+        "**Montez en gamme sur les sphères.** Les Pal Sphères de base plafonnent vite : débloquez les versions supérieures via l'arbre de technologie dès que possible, elles deviennent indispensables face aux Pals de niveau 20 et plus.",
+        "**Exploitez les altérations d'état.** Un Pal endormi, gelé ou brûlé se laisse plus facilement capturer. Les types de Pals adaptés peuvent infliger ces effets en combat."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "4 à 6 : poser une base qui travaille pour vous"
+    },
+    {
+      "type": "p",
+      "text": "La base est votre usine, votre ferme et votre coffre-fort. Un bon emplacement vous fait gagner des dizaines d'heures :"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Cherchez un plateau riche en ressources** : arbres, rochers et filons de minerai à portée du cercle de base. Le minerai devient critique dès les armes et les outils en métal.",
+        "**Suivez les missions de base** affichées dans le menu de la Palbox : elles guident votre développement et débloquent la capacité d'accueillir davantage de Pals actifs.",
+        "**Assignez les Pals selon leurs aptitudes au travail** : ignition pour les fours et les torches, arrosage pour les plantations et les moulins, minage pour les filons, abattage pour le bois, transport pour ranger la production. Un Pal au bon poste produit double ; un Pal mal placé s'épuise."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Pensez aussi à la **défense** : les raids de Pals sauvages ou de factions hostiles ciblent votre base. Un emplacement en hauteur avec peu de voies d'accès simplifie énormément la vie."
+    },
+    {
+      "type": "h2",
+      "text": "7 et 8 : garder vos Pals (et vous-même) en forme"
+    },
+    {
+      "type": "p",
+      "text": "Chaque Pal a une jauge de **SAN (sanité mentale)** qui chute quand il travaille trop, dort mal ou mange mal. Un Pal déprimé se met en grève, et votre production s'effondre. Deux réflexes simples : construisez des **lits de qualité** dès que la technologie le permet, et variez la **nourriture** du bac d'alimentation — les baies dépannent, mais les plats cuisinés restaurent bien plus de SAN. Côté joueur, ne négligez pas la météo : froid nocturne et chaleur des volcans infligent des dégâts sans les vêtements adaptés."
+    },
+    {
+      "type": "h2",
+      "text": "9 et 10 : explorer intelligemment"
+    },
+    {
+      "type": "list",
+      "items": [
+        "**Débloquez les points de voyage rapide** en passant à côté : chaque aigle lumineux activé est un téléporteur gratuit pour plus tard.",
+        "**Capturez une monture dès que possible** — terrestre d'abord, volante ensuite. Le **Wing Pack** ajouté en 1.0 permet aussi de planer sans Pal monté : un vrai confort pour rejoindre les Sky Islands.",
+        "**Fouillez les donjons et les grottes** : leurs boss renferment des Pals rares et des schémas d'équipement introuvables à la surface.",
+        "**Gardez vos points de technologie ancienne** pour l'essentiel (meilleures sphères, ferme d'élevage, équipements clés) plutôt que de tout débloquer."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Faut-il recommencer une partie avec la 1.0 ?"
+    },
+    {
+      "type": "p",
+      "text": "Les sauvegardes d'avant la 1.0 restent **compatibles**. Pocketpair recommande toutefois de repartir de zéro pour profiter de la refonte de la progression — et c'est effectivement la meilleure façon de découvrir le jeu si vous revenez après une longue pause. Votre choix ne vous enferme dans rien : les deux mondes peuvent coexister."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Comment augmenter le taux de capture dans Palworld ?",
+      "a": "Baissez les PV du Pal au maximum sans l'achever, lancez la sphère dans son dos, infligez une altération d'état (sommeil, gel, brûlure) et utilisez des sphères de qualité supérieure. Chaque effet se cumule."
+    },
+    {
+      "q": "Où construire sa première base dans Palworld ?",
+      "a": "Sur un plateau proche de bois, de pierre et surtout de filons de minerai, à l'intérieur du cercle de la Palbox. Privilégiez les hauteurs avec peu de voies d'accès pour limiter les dégâts des raids."
+    },
+    {
+      "q": "Que faire si mes Pals refusent de travailler ?",
+      "a": "Leur SAN est probablement au plus bas. Donnez-leur des lits de meilleure qualité, une nourriture plus riche que les simples baies, et vérifiez qu'ils ne sont pas blessés ou malades."
+    },
+    {
+      "q": "Faut-il recommencer une nouvelle partie avec Palworld 1.0 ?",
+      "a": "Ce n'est pas obligatoire : les sauvegardes existantes restent compatibles. Pocketpair recommande néanmoins une nouvelle partie pour profiter pleinement de la refonte de la progression."
+    }
+  ]
+}
