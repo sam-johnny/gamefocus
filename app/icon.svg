@@ -1,12 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#A78BFA"/>
-      <stop offset="1" stop-color="#6FE3F9"/>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB35C"/>
+      <stop offset="1" stop-color="#FF2E7A"/>
     </linearGradient>
+    <clipPath id="disc"><circle cx="32" cy="28" r="14.5"/></clipPath>
   </defs>
   <rect width="64" height="64" rx="14" fill="#0C0A15"/>
-  <path d="M32 12 L46 20 V36 C46 45 40 51 32 54 C24 51 18 45 18 36 V20 Z" fill="none" stroke="url(#g)" stroke-width="3"/>
-  <circle cx="32" cy="32" r="6" fill="url(#g)"/>
-  <circle cx="32" cy="32" r="11" fill="none" stroke="#6FE3F9" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <circle cx="21" cy="10" r="1.1" fill="#fff" opacity="0.55"/>
+  <circle cx="47" cy="8" r="0.9" fill="#fff" opacity="0.4"/>
+  <circle cx="54" cy="17" r="1.2" fill="#fff" opacity="0.6"/>
+  <circle cx="11" cy="20" r="0.8" fill="#fff" opacity="0.35"/>
+  <circle cx="32" cy="28" r="14.5" fill="url(#sun)"/>
+  <g clip-path="url(#disc)" fill="#0C0A15">
+    <rect x="14" y="30" width="36" height="2.2"/>
+    <rect x="14" y="35" width="36" height="3"/>
+    <rect x="14" y="41" width="36" height="4"/>
+  </g>
+  <circle cx="32" cy="28" r="14.5" fill="none" stroke="#FF7AC2" stroke-width="1.2" opacity="0.45"/>
+  <g fill="#22153A">
+    <rect x="8" y="40" width="9" height="24"/>
+    <rect x="19" y="36" width="7" height="28"/>
+    <rect x="28" y="44" width="10" height="20"/>
+    <rect x="40" y="34" width="8" height="30"/>
+    <rect x="50" y="41" width="7" height="23"/>
+    <rect x="43" y="30" width="2" height="5"/>
+  </g>
+  <rect x="21.5" y="40" width="1.8" height="2.4" fill="#FFD166" opacity="0.9"/>
+  <rect x="42.5" y="39" width="1.8" height="2.4" fill="#FFD166" opacity="0.9"/>
+  <rect x="31" y="48" width="1.8" height="2.4" fill="#FFD166" opacity="0.8"/>
+  <rect x="11" y="46" width="1.8" height="2.4" fill="#6FE3F9" opacity="0.8"/>
+  <rect x="52" y="45" width="1.8" height="2.4" fill="#FFD166" opacity="0.75"/>
+  <rect x="0" y="58" width="64" height="6" fill="#0C0A15"/>
+  <rect x="0" y="58.5" width="64" height="1" fill="#FF7AC2" opacity="0.5"/>
 </svg>
