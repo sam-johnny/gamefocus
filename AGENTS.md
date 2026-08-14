@@ -1,10 +1,10 @@
-# AGENTS.md — GameFocus
+# AGENTS.md — NeonActu
 
 > Ce fichier s'adresse aux agents de code IA. Il décrit le projet tel qu'il est réellement, sans présupposés.
 
 ## Aperçu du projet
 
-**GameFocus** est un site d'actualité jeux vidéo en français, organisé en **cocon sémantique par jeu** : chaque jeu a son dossier (page hub pilier) regroupant ses news, guides et analyses. Premier dossier : **GTA 6**. C'est un site **100 % statique** : aucune base de données, aucune API, aucun backend. Tout le contenu éditorial est en **fichiers JSON** dans `content/<jeu>/` (un fichier par article), chargés et validés au build — pensé pour être généré par un agent IA sans toucher au code.
+**NeonActu** (https://neonactu.fr) est un site d'actualité jeux vidéo en français, organisé en **cocon sémantique par jeu** : chaque jeu a son dossier (page hub pilier) regroupant ses news, guides et analyses. Premier dossier : **GTA 6**. C'est un site **100 % statique** : aucune base de données, aucune API, aucun backend. Tout le contenu éditorial est en **fichiers JSON** dans `content/<jeu>/` (un fichier par article), chargés et validés au build — pensé pour être généré par un agent IA sans toucher au code.
 
 **Objectif du site : générer du trafic organique (SEO) pour le monétiser ensuite via Google AdSense.** Toute évolution doit servir cet objectif : maillage interne fort, pages piliers par jeu, contenus à forte intention de recherche, données structurées complètes. Les emplacements pubs (`AdSlot`) sont déjà prévus dans les pages.
 
@@ -165,7 +165,7 @@ Schéma d'un article (tous les champs sont **requis**, sauf `source`/`caption` d
 Exporte :
 
 - Les types `Block` (union discriminée : `p` | `h2` | `h3` | `list` | `quote` | `image`), `FaqItem`, `Article` (le `slug` et le `game` y sont injectés par le loader — **ne pas les mettre dans le JSON**)
-- `SITE` : constantes globales (nom, URL `https://gamefocus.fr`, tagline, description SEO)
+- `SITE` : constantes globales (nom, URL `https://neonactu.fr`, tagline, description SEO)
 - `GTA_RELEASE_ISO = "2026-11-19T00:00:00Z"` : date de sortie utilisée par le compte à rebours
 - `articles: Article[]` : chargés depuis `content/` au build (Node `fs`, côté serveur uniquement)
 - Helpers : `getArticle(slug)`, `getArticlesByGame(gameSlug)`, `articleUrl(article)` → `/<jeu>/<slug>/`, `formatDate(iso)` (format français long, UTC)

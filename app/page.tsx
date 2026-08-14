@@ -27,9 +27,9 @@ export default function Home() {
         <div className="container hero-content">
           <p className="hero-kicker">Le blog des joueurs impatients</p>
           <h1 className="hero-title">
-            <span className="hero-title-top">GAME</span>
-            <span className="hero-title-script">l'actu en</span>
-            <span className="hero-title-bottom">FOCUS</span>
+            <span className="hero-title-top">L'ACTU</span>
+            <span className="hero-title-script">en</span>
+            <span className="hero-title-bottom">NEON</span>
           </h1>
           <p className="hero-sub">
             Nouveautés jeux vidéo, guides et analyses. En ce moment :
@@ -141,21 +141,16 @@ export default function Home() {
         <div className="container">
           <Reveal>
             <div className="follow-box">
-              <p className="follow-kicker">Restez focus</p>
+              <p className="follow-kicker">Restez branché</p>
               <h2 className="follow-title">
                 Le trailer 3 droppe ?
                 <br />
                 Vous le saurez en premier.
               </h2>
               <p className="follow-text">
-                Ajoutez GameFocus à vos favoris et suivez-nous : chaque annonce
-                Rockstar est décryptée dans l'heure.
+                Ajoutez NeonActu à vos favoris : chaque annonce Rockstar est
+                décryptée dans l'heure.
               </p>
-              <div className="follow-links">
-                <a href="#" className="btn btn-primary" rel="noopener">X / Twitter</a>
-                <a href="#" className="btn btn-ghost" rel="noopener">YouTube</a>
-                <a href="#" className="btn btn-ghost" rel="noopener">TikTok</a>
-              </div>
             </div>
           </Reveal>
         </div>

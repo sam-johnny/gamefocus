@@ -19,9 +19,9 @@ export default function Header() {
         <span>DOSSIER SPÉCIAL GTA 6</span>
       </div>
       <div className="header-main container">
-        <Link href="/" className="logo" aria-label="GameFocus — retour à l'accueil">
-          <span className="logo-game">GAME</span>
-          <span className="logo-focus">FOCUS</span>
+        <Link href="/" className="logo" aria-label="NeonActu — retour à l'accueil">
+          <span className="logo-game">NEON</span>
+          <span className="logo-focus">ACTU</span>
         </Link>
         <div className="header-actions">
           <nav className="main-nav" aria-label="Navigation principale">

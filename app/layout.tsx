@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} — Actualités jeux vidéo & dossier GTA 6`,
     description: SITE.description,
-    images: [{ url: "/images/hero.svg", width: 1600, height: 900, alt: "GameFocus" }],
+    images: [{ url: "/images/hero.svg", width: 1600, height: 900, alt: "NeonActu" }],
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },

@@ -33,7 +33,7 @@ export async function generateMetadata({
       description: article.description,
       publishedTime: article.date,
       modifiedTime: article.updatedAt,
-      authors: ["Rédaction GameFocus"],
+      authors: ["Rédaction NeonActu"],
       images: [{ url: article.cover, width: 2048, height: 1080, alt: article.coverAlt }],
     },
     twitter: { card: "summary_large_image" },
@@ -66,7 +66,7 @@ export default async function ArticlePage({
     datePublished: article.date,
     dateModified: article.updatedAt,
     inLanguage: "fr-FR",
-    author: { "@type": "Organization", name: "Rédaction GameFocus", url: SITE.url },
+    author: { "@type": "Organization", name: "Rédaction NeonActu", url: SITE.url },
     publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
     mainEntityOfPage: `${SITE.url}${articleUrl(article)}`,
   };
@@ -108,7 +108,7 @@ export default async function ArticlePage({
           </nav>
           <h1 className="article-title">{article.title}</h1>
           <div className="article-meta">
-            <span>Rédaction GameFocus</span>
+            <span>Rédaction NeonActu</span>
             <span aria-hidden="true">·</span>
             <time dateTime={article.date}>{formatDate(article.date)}</time>
             <span aria-hidden="true">·</span>

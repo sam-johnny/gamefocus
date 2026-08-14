@@ -1,5 +1,5 @@
 /* ============================================================
-   GAMEFOCUS — Design system
+   NEONACTU — Design system
    Thème automatique clair/sombre (suit le système, choix manuel
    mémorisé via [data-theme] sur <html>). Palette sombre : nuit
    violette + cyan ; palette claire : papier chaud + violet profond.
@@ -796,14 +796,6 @@ ul { list-style: none; }
   max-width: 480px;
   margin-inline: auto;
   color: var(--muted);
-  margin-bottom: 34px;
-}
-
-.follow-links {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 /* ============ Page article ============ */
@@ -1404,5 +1396,4 @@ ul { list-style: none; }
   .hero-title-script { margin-inline-start: clamp(0.5rem, 20vw, 4rem); }
   .article-cover img { aspect-ratio: 16 / 9; }
   .card-featured .card-body { padding: 26px; }
-  .follow-links .btn { width: 100%; justify-content: center; }
 }

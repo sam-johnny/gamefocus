@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-col">
-          <p className="footer-title">GameFocus</p>
+          <p className="footer-title">NeonActu</p>
           <p className="footer-text">
             Le blog des joueurs impatients. Actualités, guides et analyses sur les
             jeux vidéo qui comptent — en ce moment, tout sur GTA 6.
@@ -37,10 +37,10 @@ export default function Footer() {
         </nav>
       </div>
       <div className="footer-giant" aria-hidden="true">
-        <span>GAMEFOCUS</span>
+        <span>NEONACTU</span>
       </div>
       <div className="container footer-bottom">
-        <span>© 2026 GameFocus — Tous droits réservés.</span>
+        <span>© 2026 NeonActu — Tous droits réservés.</span>
         <span>
           GTA, Grand Theft Auto et Rockstar Games sont des marques de Take-Two
           Interactive. Site de fans, non affilié.

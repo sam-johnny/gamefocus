@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Génère les visuels SVG synthwave / Vice City de GameFocus (1600x900).
+"""Génère les visuels SVG synthwave / Vice City de NeonActu (1600x900).
 
 Usage : python3 scripts/generate-images.py
 Les fichiers sont écrits dans public/images/ (hero.svg, article-*.svg).

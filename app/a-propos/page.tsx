@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "À propos — qui sommes-nous ?",
   description:
-    "GameFocus est un blog indépendant dédié à l'actualité des jeux vidéo. Découvrez notre ligne éditoriale, nos sources et notre équipe.",
+    "NeonActu est un blog indépendant dédié à l'actualité des jeux vidéo. Découvrez notre ligne éditoriale, nos sources et notre équipe.",
   alternates: { canonical: "/a-propos/" },
 };
 
@@ -12,11 +12,11 @@ export default function About() {
   return (
     <div className="container about-page">
       <p className="hero-kicker">Qui sommes-nous ?</p>
-      <h1 className="about-title">À propos de GameFocus</h1>
+      <h1 className="about-title">À propos de NeonActu</h1>
 
       <div className="prose about-prose">
         <p>
-          <strong>GameFocus</strong> est un blog indépendant né d'une conviction
+          <strong>NeonActu</strong> est un blog indépendant né d'une conviction
           simple : l'actualité jeux vidéo mérite mieux que du clicbait. Nous
           couvrons les jeux qui comptent vraiment pour les joueurs, avec des
           articles vérifiés, sourcés et mis à jour.
@@ -45,7 +45,7 @@ export default function About() {
         </p>
         <h2>Transparence</h2>
         <p>
-          GameFocus est un site de fans, <strong>non affilié</strong> à Rockstar
+          NeonActu est un site de fans, <strong>non affilié</strong> à Rockstar
           Games ni à Take-Two Interactive. Le site est financé par des espaces
           publicitaires clairement identifiés. Les visuels d'illustration sont
           générés par nos soins.
