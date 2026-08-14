@@ -2,7 +2,9 @@ import { getGame } from "@/lib/games";
 
 /**
  * Layout des pages d'un jeu (hub + articles) : applique le thème du jeu
- * en surchargeant les variables CSS --accent* sur son périmètre.
+ * en surchargeant les variables CSS --accent* sur son périmètre, et pose
+ * la classe `game-<slug>` qui active les ornements propres au jeu dans
+ * globals.css (ex. `.game-gta-6` : direction artistique Vice City).
  */
 export default async function GameLayout({
   children,
@@ -20,7 +22,10 @@ export default async function GameLayout({
   if (game?.theme?.accentSoft) style["--accent-soft"] = game.theme.accentSoft;
 
   return (
-    <div className="game-scope" style={style as React.CSSProperties}>
+    <div
+      className={`game-scope game-${gameSlug}`}
+      style={style as React.CSSProperties}
+    >
       {children}
     </div>
   );

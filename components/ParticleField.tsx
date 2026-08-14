@@ -45,7 +45,7 @@ export default function ParticleField() {
         vx: (Math.random() - 0.5) * 0.12,
         vy: -(0.08 + Math.random() * 0.35),
         a: 0.15 + Math.random() * 0.5,
-        hue: Math.random() < 0.82 ? 74 : 62, // lime / jaune chaud
+        hue: Math.random() < 0.8 ? 262 : 190, // violet / cyan
         tw: Math.random() * Math.PI * 2,
       }));
     };
@@ -60,7 +60,7 @@ export default function ParticleField() {
         if (p.x > w + 8) p.x = -8;
         const alpha = p.a * (0.6 + 0.4 * Math.sin(t / 900 + p.tw));
         ctx.beginPath();
-        ctx.fillStyle = `hsla(${p.hue}, 100%, ${p.hue === 74 ? 55 : 82}%, ${alpha})`;
+        ctx.fillStyle = `hsla(${p.hue}, 95%, ${p.hue === 262 ? 76 : 80}%, ${alpha})`;
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }

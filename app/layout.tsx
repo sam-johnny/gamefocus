@@ -35,15 +35,26 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} — Actualités jeux vidéo & dossier GTA 6`,
     description: SITE.description,
-    images: [{ url: "/images/hero.jpg", width: 2048, height: 1080, alt: "GameFocus" }],
+    images: [{ url: "/images/hero.svg", width: 1600, height: 900, alt: "GameFocus" }],
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0D06",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0c0a15" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f2ea" },
+  ],
+  colorScheme: "dark light",
 };
+
+/**
+ * Applique le thème mémorisé (clair/sombre) avant le premier rendu pour
+ * éviter tout flash. Sans choix mémorisé, rien n'est posé : le thème suit
+ * automatiquement prefers-color-scheme (voir globals.css).
+ */
+const themeScript = `(function(){try{var t=localStorage.getItem("gf-theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
@@ -63,8 +74,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="fr"
       className={`${anton.variable} ${playfair.variable} ${inter.variable} ${mono.variable}`}
+      suppressHydrationWarning
     >
       <body>
+        {/* Thème mémorisé, appliqué avant peinture (anti-flash) */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

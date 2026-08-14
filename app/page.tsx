@@ -17,8 +17,8 @@ export default function Home() {
       <section className="hero">
         <div className="hero-bg">
           <img
-            src="/images/hero.jpg"
-            alt="Une ville tropicale au bord de l'océan illuminée de néons verts, évoquant Vice City dans GTA 6"
+            src="/images/hero.svg"
+            alt="Coucher de soleil aux néons roses et oranges sur une ville tropicale bordée de palmiers, évoquant Vice City dans GTA 6"
             fetchPriority="high"
           />
           <div className="hero-shade" aria-hidden="true" />
@@ -163,4 +163,3 @@ export default function Home() {
     </>
   );
 }
-

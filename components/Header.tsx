@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import { games } from "@/lib/games";
 
 const NAV = [
@@ -22,13 +23,16 @@ export default function Header() {
           <span className="logo-game">GAME</span>
           <span className="logo-focus">FOCUS</span>
         </Link>
-        <nav className="main-nav" aria-label="Navigation principale">
-          {NAV.map((item) => (
-            <Link key={item.label} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="header-actions">
+          <nav className="main-nav" aria-label="Navigation principale">
+            {NAV.map((item) => (
+              <Link key={item.label} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
