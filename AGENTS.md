@@ -10,7 +10,8 @@
 
 - Stack : **Next.js 15.3** (App Router) + **React 19** + **TypeScript strict**
 - Export statique complet (`output: "export"` dans `next.config.mjs`) — hébergeable n'importe où (GitHub Pages, Cloudflare Pages, Netlify…)
-- **Aucune librairie UI** : design system maison dans `app/globals.css` (~1120 lignes, palette noir forêt + néon lime, esprit magazine de nuit)
+- **Aucune librairie UI** : design system maison dans `app/globals.css` (~1250 lignes, palette « nuit violette + cyan » en sombre, « papier chaud + violet profond » en clair, esprit magazine)
+- **Thème clair/sombre automatique** : suit `prefers-color-scheme` ; bascule manuelle (auto → clair → sombre) via `components/ThemeToggle.tsx`, mémorisée dans `localStorage` (`gf-theme`) et appliquée par `[data-theme]` sur `<html>` — un script inline anti-flash dans `app/layout.tsx` pose le thème avant le premier rendu. Les variables CSS du `:root` existent en deux variantes (sombre par défaut ; clair via `[data-theme="light"]` ou media query). Toute nouvelle couleur doit passer par ces variables, jamais en dur
 - Polices via `next/font/google` : Anton (display), Playfair Display (serif), Inter (texte), JetBrains Mono — exposées en variables CSS `--font-*`
 - Langue du site et du code (commentaires, contenus) : **français**
 - Site de fans, non affilié à Rockstar Games / Take-Two Interactive
@@ -55,11 +56,14 @@ Règles du cocon (à respecter dans toute évolution) :
 ```
 app/                    pages Next.js (App Router)
   layout.tsx            layout racine : polices, métadonnées globales, JSON-LD WebSite,
+                        script anti-flash du thème (localStorage → [data-theme]),
                         Header/Footer, lang="fr"
   page.tsx              accueil : hero (ParticleField), Marquee, compte à rebours,
                         cartes des dossiers (hubs), grille d'articles, AdSlot
   [game]/layout.tsx      layout du jeu : applique game.theme (surcharge des
-                         variables CSS --accent*) sur le hub et ses articles
+                         variables CSS --accent*) sur le hub et ses articles, et pose
+                         la classe `game-<slug>` qui active les ornements propres au
+                         jeu dans globals.css (ex. `.game-gta-6` : ambiance Vice City)
   [game]/page.tsx       page hub par jeu : generateStaticParams + dynamicParams = false,
                         métadonnées + canonical, JSON-LD CollectionPage/ItemList &
                         BreadcrumbList, intro SEO, infos clés, articles du jeu, AdSlot
@@ -78,8 +82,9 @@ lib/site.ts             constantes SITE / GTA_RELEASE_ISO (sans Node, importable
 lib/validate.ts         validateurs partagés par les loaders (fail → build cassé)
 content/<jeu>/          un dossier par JEU : _jeu.json (définition) + <slug>.json (articles)
 components/             composants réutilisables (voir ci-dessous)
-public/images/          visuels — ABSENT DU DÉPÔT (illustrations générées par IA,
-                        à copier depuis l'environnement de build ; référencées en /images/*.jpg)
+public/images/          visuels SVG versionnés (scènes synthwave « Vice City »
+                        générées par script : hero.svg, article-*.svg ; référencés en
+                        /images/*.svg) — légers, nets à toutes les résolutions
 ```
 
 `dist/`, `out/`, `.next/` et `node_modules/` sont gitignorés.
@@ -111,7 +116,7 @@ Schéma (tous les champs sont **requis**, sauf `releaseIso` et `theme`) :
 }
 ```
 
-**Thème par jeu** : `theme` surcharge les variables CSS `--accent`, `--accent-2` et `--accent-soft` sur toutes les pages du jeu (hub + articles), via `app/[game]/layout.tsx`. Sans `theme`, le jeu hérite de la palette par défaut (noir forêt + néon lime).
+**Thème par jeu** : `theme` surcharge les variables CSS `--accent`, `--accent-2` et `--accent-soft` sur toutes les pages du jeu (hub + articles), via `app/[game]/layout.tsx`. Sans `theme`, le jeu hérite de la palette par défaut (violette, déclinée en clair/sombre). Le layout pose aussi la classe `game-<slug>` sur le conteneur : les ornements spécifiques d'un jeu (dégradés de titres, halos, cadres néon…) se définissent dans `globals.css` sous `.game-<slug>` — voir le bloc `.game-gta-6` pour l'exemple complet (rose néon #ff2e7a + orange sunset #ffb35c).
 
 **Ajouter un jeu** : créer `content/<slug-du-jeu>/_jeu.json` + ses articles JSON dans le même dossier — le hub `/<jeu>/`, la nav, le footer, l'accueil et le sitemap sont générés automatiquement au build. L'ordre d'affichage des jeux suit l'ordre alphabétique des dossiers.
 
@@ -179,12 +184,13 @@ Exporte :
 | `ParticleField.tsx` | **client** | canvas de particules néon en fond du hero ; respecte `prefers-reduced-motion` |
 | `Marquee.tsx` | **client** | bandeau défilant |
 | `Reveal.tsx` | **client** | animation d'apparition au scroll |
+| `ThemeToggle.tsx` | **client** | bascule de thème auto/clair/sombre (icônes soleil, lune, auto) |
 
 ## Conventions de code
 
 - **Alias de chemin `@/*`** → racine du projet (`@/lib/articles`, `@/components/Header`)
 - TypeScript **strict** ; props typées, pas de `any`
-- Composants **serveur par défaut** ; `"use client"` uniquement quand c'est nécessaire (hooks, canvas, timers) — 4 composants actuellement
+- Composants **serveur par défaut** ; `"use client"` uniquement quand c'est nécessaire (hooks, canvas, timers) — 5 composants actuellement
 - Export `default` pour les composants, nommés `PascalCase` ; fonctions et constantes en camelCase/SCREAMING_SNAKE_CASE
 - Images : `<img>` natif partout (pas `next/image`, car `images: { unoptimized: true }` + export statique), avec `alt` descriptif en français et `fetchPriority="high"` sur les visuels hero/cover
 - Styles : pas de CSS modules ni Tailwind — classes globales nommées en kebab-case (`.article-page`, `.hero-title`, `.btn-primary`, `.hub-card`) définies dans `app/globals.css`, adossées aux variables CSS du `:root`
@@ -207,6 +213,6 @@ Le site est optimisé pour le référencement ; **ne pas casser ces mécanismes*
 
 - Aucun secret, aucune variable d'environnement, aucune dépendance au-delà de next/react/react-dom (+ types et TypeScript en dev)
 - `dangerouslySetInnerHTML` utilisé uniquement pour injecter les JSON-LD sérialisés depuis des données locales du dépôt — ne jamais l'étendre à des données externes
-- Les visuels `public/images/` ne sont pas versionnés : un article sans son image affichera une image cassée au build comme en prod
+- Les visuels `public/images/` sont versionnés (SVG) : tout nouvel article doit référencer un visuel existant ou venir avec le sien, sinon image cassée au build comme en prod
 - Dates de contenu en ISO (`date`, `updatedAt`) ; `formatDate` suppose `YYYY-MM-DD` et force midi UTC pour éviter les décalages de fuseau
 - Publicité : `AdSlot` est un placeholder ; activer AdSense = remplacer son contenu par le snippet `ins.adsbygoogle` et ajouter le script global dans `app/layout.tsx`

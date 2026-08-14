@@ -7,6 +7,8 @@ Blog jeux vidéo en français, construit avec **Next.js 15** (App Router, export
 - Next.js 15 + React 19 + TypeScript
 - Export 100 % statique (`output: "export"`) — hébergeable partout (GitHub Pages, Cloudflare Pages, Netlify…)
 - Aucune librairie UI : design system maison en CSS (`app/globals.css`)
+- Thème clair/sombre automatique (suit le système, bascule manuelle mémorisée)
+- Direction artistique propre à chaque dossier de jeu (GTA 6 : néons Vice City)
 - Polices : Anton, Playfair Display, Inter, JetBrains Mono (via `next/font`)
 
 ## Commandes
@@ -29,11 +31,10 @@ app/                  pages Next.js (App Router)
   sitemap.ts          sitemap.xml généré
   robots.ts           robots.txt généré
   globals.css         design system complet
-components/           Header, Footer, ArticleCard, Countdown, Marquee,
-                      ParticleField, Reveal, AdSlot, ArticleBody
+components/           Header, Footer, ThemeToggle, ArticleCard, Countdown,
+                      Marquee, ParticleField, Reveal, AdSlot, ArticleBody
 lib/articles.ts       contenu éditorial — AJOUTER UN ARTICLE ICI
-public/images/        visuels (illustrations générées par IA, non incluses
-                      dans ce dépôt — à copier depuis l'environnement de build)
+public/images/        visuels SVG versionnés (scènes synthwave « Vice City »)
 ```
 
 ## Ajouter un article
