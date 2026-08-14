@@ -1,26 +1,81 @@
 /* ============================================================
    GAMEFOCUS — Design system
-   Palette : noir forêt + néon lime, esprit magazine de nuit
+   Thème automatique clair/sombre (suit le système, choix manuel
+   mémorisé via [data-theme] sur <html>). Palette sombre : nuit
+   violette + cyan ; palette claire : papier chaud + violet profond.
+   Le dossier GTA 6 surcharge les accents (.game-gta-6).
    ============================================================ */
 
+/* ---------- Jetons : thème sombre (défaut) ---------- */
+
 :root {
-  --bg: #0b0d06;
-  --bg-raise: #12150a;
-  --bg-card: #151a0c;
-  --line: rgba(242, 244, 236, 0.1);
-  --line-strong: rgba(242, 244, 236, 0.22);
-  --text: #f2f4ec;
-  --muted: #9aa08c;
-  --accent: #bffa00;
-  --accent-soft: rgba(191, 250, 0, 0.12);
-  --accent-2: #fbff85;
-  --ink: #0b0d06;
+  --bg: #0c0a15;
+  --bg-raise: #141022;
+  --bg-card: #181228;
+  --line: rgba(237, 232, 255, 0.09);
+  --line-strong: rgba(237, 232, 255, 0.22);
+  --text: #f1edfc;
+  --muted: #9c93ba;
+  --prose: #d3cce6;
+  --accent: #a78bfa;
+  --accent-2: #6fe3f9;
+  --accent-soft: rgba(167, 139, 250, 0.13);
+  --ink: #120e20;
+  --header-bg: rgba(12, 10, 21, 0.78);
+  --footer-bg: #080612;
+  --shadow-card: 0 18px 44px rgba(4, 1, 14, 0.45);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius: 18px;
+  color-scheme: dark;
 }
+
+/* ---------- Jetons : thème clair ---------- */
+
+[data-theme="light"] {
+  --bg: #f5f2ea;
+  --bg-raise: #fdfbf5;
+  --bg-card: #fffdf8;
+  --line: rgba(25, 17, 48, 0.1);
+  --line-strong: rgba(25, 17, 48, 0.24);
+  --text: #1e1732;
+  --muted: #6a6184;
+  --prose: #3c3455;
+  --accent: #6a3df0;
+  --accent-2: #0d7d95;
+  --accent-soft: rgba(106, 61, 240, 0.09);
+  --ink: #ffffff;
+  --header-bg: rgba(245, 242, 234, 0.82);
+  --footer-bg: #eae5d9;
+  --shadow-card: 0 16px 38px rgba(42, 28, 90, 0.13);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f2ea;
+    --bg-raise: #fdfbf5;
+    --bg-card: #fffdf8;
+    --line: rgba(25, 17, 48, 0.1);
+    --line-strong: rgba(25, 17, 48, 0.24);
+    --text: #1e1732;
+    --muted: #6a6184;
+    --prose: #3c3455;
+    --accent: #6a3df0;
+    --accent-2: #0d7d95;
+    --accent-soft: rgba(106, 61, 240, 0.09);
+    --ink: #ffffff;
+    --header-bg: rgba(245, 242, 234, 0.82);
+    --footer-bg: #eae5d9;
+    --shadow-card: 0 16px 38px rgba(42, 28, 90, 0.13);
+    color-scheme: light;
+  }
+}
+
+/* ---------- Base ---------- */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 118px; }
 
 body {
   background: var(--bg);
@@ -30,13 +85,23 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease);
 }
 
 ::selection { background: var(--accent); color: var(--ink); }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #2a2f1b; border-radius: 5px; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 26%, var(--bg-raise));
+  border-radius: 5px;
+}
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 img { display: block; max-width: 100%; }
@@ -54,9 +119,9 @@ ul { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(11, 13, 6, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -84,6 +149,12 @@ ul { list-style: none; }
   gap: 24px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
 .logo {
   font-family: var(--font-display), sans-serif;
   font-size: 26px;
@@ -95,24 +166,30 @@ ul { list-style: none; }
 }
 
 .logo-game { color: var(--text); }
+
 .logo-focus {
-  color: var(--accent);
   position: relative;
+  background: linear-gradient(92deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
 .logo-focus::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 2px;
+  bottom: 1px;
   height: 3px;
-  background: var(--accent);
-  opacity: 0.35;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.4;
+  border-radius: 2px;
 }
 
 .main-nav {
   display: flex;
-  gap: 28px;
+  gap: 6px;
   font-family: var(--font-mono), monospace;
   font-size: 12px;
   letter-spacing: 0.12em;
@@ -121,24 +198,52 @@ ul { list-style: none; }
 
 .main-nav a {
   color: var(--muted);
-  transition: color 0.25s var(--ease);
-  position: relative;
+  padding: 8px 13px;
+  border-radius: 999px;
+  transition: color 0.25s var(--ease), background-color 0.25s var(--ease);
 }
 
-.main-nav a::before {
-  content: "▸";
+.main-nav a:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+/* Bouton de bascule de thème */
+
+.theme-toggle {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.theme-toggle:hover {
   color: var(--accent);
-  opacity: 0;
-  margin-right: 4px;
-  transition: opacity 0.25s var(--ease);
+  border-color: var(--accent);
+  transform: rotate(18deg);
 }
 
-.main-nav a:hover { color: var(--text); }
-.main-nav a:hover::before { opacity: 1; }
+.theme-toggle svg { width: 18px; height: 18px; display: none; }
+.theme-toggle.is-auto .icon-auto,
+.theme-toggle.is-light .icon-sun,
+.theme-toggle.is-dark .icon-moon { display: block; }
 
 /* ============ Hero ============ */
+/* Le hero repose sur un visuel sombre : ses couleurs sont fixes,
+   indépendantes du thème clair/sombre. */
 
 .hero {
+  --hero-text: #f4f1ff;
+  --hero-muted: rgba(244, 241, 255, 0.74);
+  --hero-accent: #b79cff;
+  --hero-accent-2: #7df9ff;
   position: relative;
   min-height: 94svh;
   display: flex;
@@ -159,8 +264,8 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(11, 13, 6, 0.55) 0%, rgba(11, 13, 6, 0.05) 35%, rgba(11, 13, 6, 0.72) 72%, var(--bg) 100%),
-    radial-gradient(60% 60% at 20% 80%, rgba(11, 13, 6, 0.55), transparent 70%);
+    linear-gradient(180deg, rgba(10, 7, 20, 0.55) 0%, rgba(10, 7, 20, 0.05) 35%, rgba(10, 7, 20, 0.72) 72%, #0c0a15 100%),
+    radial-gradient(60% 60% at 20% 80%, rgba(10, 7, 20, 0.55), transparent 70%);
 }
 
 .particle-field {
@@ -180,7 +285,7 @@ ul { list-style: none; }
   font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--hero-accent);
   margin-bottom: 22px;
 }
 
@@ -207,12 +312,15 @@ ul { list-style: none; }
   width: max-content;
 }
 
-.hero-title-top { color: var(--text); }
+.hero-title-top {
+  color: var(--hero-text);
+  text-shadow: 0 8px 44px rgba(6, 2, 16, 0.6);
+}
 
 .hero-title-bottom {
   color: transparent;
-  -webkit-text-stroke: 2px var(--accent);
-  text-stroke: 2px var(--accent);
+  -webkit-text-stroke: 2px var(--hero-accent);
+  text-stroke: 2px var(--hero-accent);
 }
 
 .hero-title-script {
@@ -222,23 +330,36 @@ ul { list-style: none; }
   font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: clamp(1.6rem, 4.6vw, 4rem);
-  color: var(--accent-2);
+  color: var(--hero-accent-2);
   margin-inline-start: clamp(1rem, 12vw, 12rem);
   margin-block-end: -0.45em;
   z-index: 2;
   transform: rotate(-4deg);
+  text-shadow: 0 4px 22px rgba(6, 2, 16, 0.55);
 }
 
 .hero-sub {
   max-width: 560px;
   font-size: 17px;
-  color: var(--muted);
+  color: var(--hero-muted);
   margin-bottom: 36px;
 }
 
-.hero-sub strong { color: var(--text); }
+.hero-sub strong { color: var(--hero-text); }
 
 .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.hero-cta .btn-ghost {
+  border-color: rgba(244, 241, 255, 0.4);
+  color: var(--hero-text);
+  background: rgba(10, 7, 20, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.hero-cta .btn-ghost:hover {
+  border-color: var(--hero-accent);
+  color: var(--hero-accent);
+}
 
 .hero-scroll {
   position: absolute;
@@ -247,7 +368,7 @@ ul { list-style: none; }
   z-index: 2;
   width: 22px;
   height: 38px;
-  border: 1.5px solid var(--line-strong);
+  border: 1.5px solid rgba(244, 241, 255, 0.45);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -258,7 +379,7 @@ ul { list-style: none; }
   width: 3px;
   height: 8px;
   border-radius: 2px;
-  background: var(--accent);
+  background: var(--hero-accent);
   animation: scrollhint 1.8s var(--ease) infinite;
 }
 
@@ -280,26 +401,26 @@ ul { list-style: none; }
   font-size: 12.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
   cursor: pointer;
   border: 1px solid transparent;
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(115deg, var(--accent), color-mix(in srgb, var(--accent) 62%, var(--accent-2)));
   color: var(--ink);
   font-weight: 700;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(191, 250, 0, 0.28);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 34%, transparent);
 }
 
 .btn-ghost {
   border-color: var(--line-strong);
   color: var(--text);
-  background: rgba(11, 13, 6, 0.35);
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
 }
 
 .btn-ghost:hover {
@@ -315,10 +436,9 @@ ul { list-style: none; }
 .marquee {
   display: flex;
   align-items: stretch;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent-2)));
   color: var(--ink);
   overflow: hidden;
-  border-block: 1px solid var(--ink);
 }
 
 .marquee-clock {
@@ -424,22 +544,33 @@ ul { list-style: none; }
 }
 
 .countdown-cell {
-  background: var(--bg-raise);
+  background:
+    radial-gradient(120% 130% at 50% -20%, var(--accent-soft), transparent 62%),
+    var(--bg-raise);
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   padding: clamp(20px, 4vw, 44px) 12px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.countdown-cell:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .countdown-cell::after {
   content: "";
   position: absolute;
-  inset-inline: 0;
+  inset-inline: 14px;
   bottom: 0;
   height: 2px;
-  background: var(--accent);
-  opacity: 0.7;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+  opacity: 0.85;
 }
 
 .countdown-value {
@@ -463,7 +594,7 @@ ul { list-style: none; }
 
 .countdown-progress {
   margin-top: 26px;
-  height: 6px;
+  height: 8px;
   background: var(--bg-raise);
   border: 1px solid var(--line);
   border-radius: 99px;
@@ -491,16 +622,18 @@ ul { list-style: none; }
 .card {
   background: var(--bg-card);
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 
 .card:hover {
-  border-color: var(--line-strong);
-  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
 }
 
 .card-media {
@@ -540,7 +673,7 @@ ul { list-style: none; }
   background: var(--accent-soft);
   color: var(--accent);
   border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 99px;
   font-weight: 700;
   text-transform: uppercase;
@@ -557,7 +690,7 @@ ul { list-style: none; }
 }
 
 .card-title a { transition: color 0.3s var(--ease); }
-.card:hover .card-title a { color: var(--accent-2); }
+.card:hover .card-title a { color: var(--accent); }
 
 .card-excerpt {
   color: var(--muted);
@@ -582,6 +715,7 @@ ul { list-style: none; }
 .card-featured {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 .card-featured .card-media { aspect-ratio: auto; height: 100%; min-height: 340px; }
@@ -607,7 +741,8 @@ ul { list-style: none; }
 .ad-slot {
   margin-block: 34px;
   border: 1px dashed var(--line-strong);
-  background: rgba(242, 244, 236, 0.02);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--text) 3%, transparent);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -630,11 +765,14 @@ ul { list-style: none; }
 
 .follow-box {
   border: 1px solid var(--line-strong);
+  border-radius: 26px;
   background:
     radial-gradient(80% 120% at 85% 0%, var(--accent-soft), transparent 60%),
+    radial-gradient(60% 100% at 8% 100%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 55%),
     var(--bg-raise);
   padding: clamp(40px, 7vw, 84px);
   text-align: center;
+  box-shadow: var(--shadow-card);
 }
 
 .follow-kicker {
@@ -681,7 +819,7 @@ ul { list-style: none; }
   margin-bottom: 26px;
 }
 
-.breadcrumb a { color: var(--accent); }
+.breadcrumb a { color: var(--accent); font-weight: 700; }
 .breadcrumb a:hover { text-decoration: underline; }
 
 .article-title {
@@ -706,8 +844,10 @@ ul { list-style: none; }
 
 .article-cover {
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 54px;
+  box-shadow: var(--shadow-card);
 }
 
 .article-cover img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
@@ -731,6 +871,7 @@ ul { list-style: none; }
 
 .aside-box {
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: var(--bg-raise);
   padding: 26px;
 }
@@ -756,8 +897,11 @@ ul { list-style: none; }
 /* Encadré l'essentiel */
 
 .keypoints {
-  border: 1px solid rgba(191, 250, 0, 0.4);
-  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 160% at 100% 0%, var(--accent-soft), transparent 58%),
+    var(--bg-raise);
   padding: 28px 30px;
   margin-bottom: 44px;
 }
@@ -791,7 +935,7 @@ ul { list-style: none; }
 
 .prose { max-width: 720px; font-size: 16.5px; line-height: 1.8; }
 
-.prose p { margin-bottom: 26px; color: #d9ddd0; }
+.prose p { margin-bottom: 26px; color: var(--prose); }
 .prose strong { color: var(--text); font-weight: 700; }
 
 .prose h2 {
@@ -816,7 +960,7 @@ ul { list-style: none; }
 .prose ul li {
   padding-left: 26px;
   position: relative;
-  color: #d9ddd0;
+  color: var(--prose);
 }
 
 .prose ul li::before {
@@ -826,13 +970,15 @@ ul { list-style: none; }
   top: 0.62em;
   width: 8px;
   height: 8px;
-  background: var(--accent);
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
 }
 
 .prose blockquote {
   margin: 40px 0;
   padding: 30px 34px;
   border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--bg-raise);
 }
 
@@ -855,7 +1001,7 @@ ul { list-style: none; }
 }
 
 .prose figure { margin: 36px 0; }
-.prose figure img { border: 1px solid var(--line); }
+.prose figure img { border: 1px solid var(--line); border-radius: var(--radius); }
 .prose figcaption {
   margin-top: 10px;
   font-family: var(--font-mono), monospace;
@@ -879,9 +1025,13 @@ ul { list-style: none; }
 
 .faq-item {
   border: 1px solid var(--line);
+  border-radius: 14px;
   background: var(--bg-raise);
   margin-bottom: 12px;
+  transition: border-color 0.3s var(--ease);
 }
+
+.faq-item:hover { border-color: color-mix(in srgb, var(--accent) 38%, transparent); }
 
 .faq-item summary {
   cursor: pointer;
@@ -908,7 +1058,7 @@ ul { list-style: none; }
 }
 
 .faq-item[open] summary::after { transform: rotate(45deg); }
-.faq-item summary:hover { color: var(--accent-2); }
+.faq-item summary:hover { color: var(--accent); }
 
 .faq-item p {
   padding: 0 22px 20px;
@@ -943,7 +1093,7 @@ ul { list-style: none; }
 
 /* ============ Hub (dossier par jeu) ============ */
 
-.hub-page { padding-top: 56px; }
+.hub-page { padding-top: 56px; position: relative; }
 
 .hub-facts {
   display: grid;
@@ -973,13 +1123,15 @@ ul { list-style: none; }
   height: 100%;
   background: var(--bg-card);
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 
 .hub-card:hover {
-  border-color: var(--line-strong);
-  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
 }
 
 .hub-card-media {
@@ -1013,7 +1165,7 @@ ul { list-style: none; }
   transition: color 0.3s var(--ease);
 }
 
-.hub-card:hover .hub-card-title { color: var(--accent-2); }
+.hub-card:hover .hub-card-title { color: var(--accent); }
 
 .hub-card-tagline { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
@@ -1023,7 +1175,7 @@ ul { list-style: none; }
 
 .site-footer {
   border-top: 1px solid var(--line);
-  background: #080a04;
+  background: var(--footer-bg);
   overflow: hidden;
 }
 
@@ -1039,7 +1191,11 @@ ul { list-style: none; }
   font-size: 24px;
   text-transform: uppercase;
   margin-bottom: 14px;
-  color: var(--accent);
+  background: linear-gradient(92deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  width: max-content;
 }
 
 .footer-text { color: var(--muted); font-size: 14px; max-width: 340px; }
@@ -1077,7 +1233,7 @@ ul { list-style: none; }
   text-transform: uppercase;
   line-height: 0.9;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(191, 250, 0, 0.28);
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 30%, transparent);
   white-space: nowrap;
 }
 
@@ -1113,6 +1269,104 @@ ul { list-style: none; }
   html { scroll-behavior: auto; }
 }
 
+/* ============================================================
+   Dossier GTA 6 — direction artistique « Vice City »
+   Les accents (--accent, --accent-2, --accent-soft) sont injectés
+   par app/[game]/layout.tsx depuis content/gta-6/_jeu.json
+   (rose néon + orange sunset). Ici : les ornements propres au jeu.
+   ============================================================ */
+
+/* Halo sunset au sommet du hub et des articles du dossier */
+
+.game-gta-6 .hub-page::before,
+.game-gta-6 .article-page::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 460px;
+  background:
+    radial-gradient(52% 68% at 84% 0%, color-mix(in srgb, var(--accent-2) 15%, transparent), transparent 62%),
+    radial-gradient(58% 78% at 10% 8%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 64%);
+  pointer-events: none;
+}
+
+.game-gta-6 .article-page { position: relative; }
+
+/* Titres en dégradé rose → orange, signature Vice City */
+
+.game-gta-6 .article-title,
+.game-gta-6 .section-title {
+  background: linear-gradient(96deg, var(--accent) 8%, var(--accent-2) 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Le filet d'accent des intertitres passe en dégradé vertical */
+
+.game-gta-6 .prose h2,
+.game-gta-6 .faq-title {
+  border-left: 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.game-gta-6 .prose h2::before,
+.game-gta-6 .faq-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  bottom: 0.08em;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+
+/* Couvertures : cadre néon rose avec lueur sunset */
+
+.game-gta-6 .article-cover {
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 22px 60px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+/* Encadré « L'essentiel » : fond sunset naissant */
+
+.game-gta-6 .keypoints {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  background:
+    radial-gradient(130% 170% at 100% 0%, var(--accent-soft), transparent 58%),
+    radial-gradient(120% 160% at 0% 100%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 55%),
+    var(--bg-raise);
+}
+
+/* Citations et encadrés latéraux teintés */
+
+.game-gta-6 .prose blockquote {
+  border-left: 0;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(120deg, var(--accent-soft), transparent 70%),
+    var(--bg-raise);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.game-gta-6 .aside-box {
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+/* Survol des cartes du dossier : lueur rose */
+
+.game-gta-6 .card:hover {
+  box-shadow: 0 20px 54px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Sélection de texte aux couleurs du dossier */
+
+.game-gta-6 ::selection { background: var(--accent); color: #fff; }
+
 /* ============ Responsive ============ */
 
 @media (max-width: 1020px) {
@@ -1126,7 +1380,17 @@ ul { list-style: none; }
 
 @media (max-width: 760px) {
   .section { padding-block: 60px; }
-  .main-nav { gap: 16px; font-size: 11px; }
+  .header-main { flex-wrap: wrap; row-gap: 6px; padding-block: 12px; }
+  .header-actions { width: 100%; justify-content: space-between; gap: 12px; }
+  .main-nav {
+    gap: 2px;
+    font-size: 11px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { padding: 8px 9px; white-space: nowrap; }
   .section-note { display: none; }
   .articles-grid { gap: 18px; }
   .grid-item,
